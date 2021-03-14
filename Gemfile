@@ -65,3 +65,6 @@ gem "stripe", "~> 5.30"
 
 # add ultrahook for webhook endpoints
 gem "ultrahook", "~> 1.0"
+
+# add rolify to manage user roles (e.g. admin vs customer)
+gem "rolify", "~> 5.3"
