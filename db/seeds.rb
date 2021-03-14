@@ -69,23 +69,24 @@ if User.count == 0
     first_name: "Victor",
     last_name: "Zottmann",
     email: "victor@email.com",
-    password: "123456",
+    password: "000000",
   )
+  # add admin authorization to user1
   user1.add_role "admin"
   user1.save!
   
   user2 = User.create(
     first_name: "Mark",
     last_name: "Johnson",
-    email: "markj@email.com",
-    password: "123456"
+    email: "mark@email.com",
+    password: "000000"
   )
 
   user3 = User.create(
     first_name: "John",
     last_name: "Markson",
-    email: "johnm@email.com",
-    password: "123456"
+    email: "john@email.com",
+    password: "000000"
   )
 end
 

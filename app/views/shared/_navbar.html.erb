@@ -22,10 +22,12 @@
           </ul>
         </li>
 
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to 'Edit Categories', categories_path, class: "nav-link" %>
-          </li>
+        <% if user_signed_in?%>
+          <% if has_role?(:admin) %>
+            <li class="nav-item">
+              <%= link_to 'Edit Categories', categories_path, class: "nav-link" %>
+            </li>
+          <% end %>
           
           <li class="nav-item">
             <%= link_to 'Create Book', new_book_path, class: "nav-link" %>
