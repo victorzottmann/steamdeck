@@ -28,26 +28,18 @@
   
   <div class="basket">  
     <div class="basket-links">
-      <% if !@book.user && !current_user %>
-        <%= link_to "Add to Cart", "#", class: "basket-text btn btn-primary", id: "basket-button" %>
-        <br><br>
-      <% end %>
-
-      <%#= link_to "Exchange with Someone", "#", class: "basket-text btn btn-primary", id: "exchange-button" %>
-      <%# if @book.available %>
-      <%# end %>
-
       <% if user_signed_in? %>
         <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= @book.price %></button>
       <% else %>
         <%= button_to "Rent for #{@book.price}", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
       <% end %>
-      <br><br>
     </div>
-
-    <h5 class="map-heading">Locations Available for Pickup:</h5>
-    <div id="map">
-      <%= javascript_pack_tag "leaflet/index" %>
+    <br><br><br>
+    <div class="map-container">
+      <h5 class="map-heading">Locations Available for Pickup:</h5>
+      <div id="map">
+        <%= javascript_pack_tag "leaflet/index" %>
+      </div>
     </div>
   </div>
 
