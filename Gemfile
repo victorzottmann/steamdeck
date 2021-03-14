@@ -62,3 +62,6 @@ gem "aws-sdk-s3", "~> 1.91"
 
 # add stripe for payments
 gem "stripe", "~> 5.30"
+
+# add ultrahook for webhook endpoints
+gem "ultrahook", "~> 1.0"
