@@ -59,3 +59,6 @@ gem "devise", "~> 4.7"
 
 # add AWS S3 bucket
 gem "aws-sdk-s3", "~> 1.91"
+
+# add stripe for payments
+gem "stripe", "~> 5.30"
