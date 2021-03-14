@@ -56,3 +56,6 @@ gem 'jquery-rails'
 
 # add devise for user authentication
 gem "devise", "~> 4.7"
+
+# add AWS S3 bucket
+gem "aws-sdk-s3", "~> 1.91"
