@@ -36,12 +36,23 @@
       </ul> 
 
       <ul class="navbar-nav mr-auto">
-
-        <li class="nav-item">
-          <%= link_to 'My Profile', user_profile_path, class: "nav-link active" %>
-        </li>
        
-        <li class="nav-item">
+        <li class="nav-item dropdown">
+          <a class="nav-link mx-auto dropdown-toggle" id="dropdown-link" href="#" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown07">
+            <%= link_to 'My Profile', user_profile_path, class: "dropdown-item" %>
+            <% if user_signed_in? %>
+              <%= link_to 'Log out', destroy_user_session_path, method: "delete", class: "dropdown-item" %>
+            <% else %>
+              <%= link_to 'Log in', new_user_session_path, class: "dropdown-item" %>
+            <% end %>
+          </ul>
+          <li class="nav-item">
+            <%= link_to 'My Cart', "#", class: "nav-link active" %>
+          </li>
+        </li>
+
+        <!-- <li class="nav-item">
           <%= link_to 'Cart', user_profile_path, class: "nav-link active" %>
         </li>
 
@@ -51,7 +62,7 @@
           <% else %>
             <%= link_to 'Log in', new_user_session_path, class: "nav-link active", id: "last-link" %>
           <% end %>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
