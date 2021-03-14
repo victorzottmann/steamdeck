@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <h2 class="hero-title text-center m-5">Edit Profile</h2>
+</div>
+
+<div class="edit-profile-container">
+  <div class="form-group">
+    <% if @user.profile_picture.attached? %>
+      <%= image_tag @user.profile_picture, class: "edit-picture" %>
+    <% else %>
+      <p class="picture-text">You don't have a profile picture!</p>
+      <br>
+    <% end %>
+    <br>
+    <%= render "form" %>
+  </div>
+</div>

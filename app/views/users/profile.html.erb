@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <h2 class="hero-title text-center m-5">My Profile</h2>
+</div>
+
+
+<div class="user-container">
+  <div class="user-card">
+    <div class="user-img-container">
+      <% if @user.profile_picture.attached? %>
+        <%= image_tag @user.profile_picture, class: "user-img" %>
+      <% else %>
+        <p>Edit your profile to add a picture.</p>
+      <% end%>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= @user.name %></h5>
+      <div class="options-container">
+        <%= link_to "Edit Profile", edit_user_path, class: "btn" %>
+        <%= link_to "Account Settings", edit_user_registration_path, class: "btn" %>
+      </div>
+      <hr>
+      <h5>Bio</h5>
+      <p class="card-text"><%= @user.bio %></p>
+      <hr>
+    </div>
+  </div>
+</div>
+<br><br>
+
+<h2 class="my-books text-center">My Books</h2>
+<br><br>
+
+<div class="user-books-container">
+  <% @user.books.each do |book|%>
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <%= link_to image_tag book.picture, class: "card-img-top" if book.picture.attached? %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= book.title %></h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">
+              <span><%= link_to "View", book_path(book.id) %> | <%= link_to "Edit", edit_book_path(book.id) %></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<br><br>
+
+<h2 class="my-books text-center">Current Rentals</h2>
+<br><br>

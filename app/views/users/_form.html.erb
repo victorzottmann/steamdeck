@@ -1,0 +1,29 @@
+
+<div class="form-container">
+  <%= form_with(model: @user, url: edit_user_path, local: true) do |form| %>
+    <br>
+    <div class="field">
+      <%= form.label :upload_picture %> <br>
+      <%= form.file_field :profile_picture, accept: "image/png, image/jpeg, image/jpg", class: "form-control" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :first_name %>
+      <%= form.text_field :first_name, class: "form-control", autocomplete: "off" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :last_name %>
+      <%= form.text_field :last_name, class: "form-control", autocomplete: "off" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :bio %>
+      <%= form.text_area :bio, class: "form-control", autocomplete: "off" %>
+    </div>
+    <br>
+    <div class="action">
+      <%= form.submit "Update" %>
+    </div>
+  <% end %>
+</div>
