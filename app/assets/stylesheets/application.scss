@@ -16,9 +16,16 @@
 
  @import "bootstrap";
 
+ $primary-color: #33658a;
+
+ h1 {
+   margin-top: 0;
+   margin-bottom: 0;
+ }
+
  .body {
   box-sizing: border-box;
-}
+ }
 
 .brand-search {
   height: 90px;
@@ -28,8 +35,9 @@
   align-items: center;
 
   .navbar-brand {
-    color: #189DAB;
-    font-size: 2.1rem;
+    align-items: center;
+    color: $primary-color;
+    font-size: 2.5rem;
   }
 
   .search-bar {
@@ -50,17 +58,18 @@
     .btn {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       margin-left: -1px;
       width: 10vw;
       border: 1px solid black;
-      background-color: #189DAB;
-      color: white;
+      background-color: #ff9f1c;
+      color: black;
       float: right;
     }
 
     .btn:hover {
-      background-color: #148996;
+      background-color: #f1981a;
+      // #148996
     }
 
     .btn:focus {
@@ -70,35 +79,61 @@
 }
 
 .navbar {
-  background-color: #189DAB;
+  background-color: $primary-color;
   height: 50px;
 
-  #dropdown-link {
-    text-decoration: none;
-  }
+  .container {
+    .navbar-collapse {
+      .navbar-nav {
+        .nav-item {
+          #first-link {
+            padding-left: 0;
+          }
+        }
+        
+        
+        #dropdown-link {
+          text-decoration: none;
+        }
+      
+        .dropdown-menu {
+          display: none;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border: 1.5px solid $primary-color;
+         }
+         
+         .dropdown:hover {
+           .dropdown-menu {
+             display: block;
+             top: 45px;
+           }
+        }
+      
+        .nav-link {
+          color: white;
+          font-size: 1.1rem;
+        }
+      
+        .nav-link:hover {
+          text-decoration: underline;
+        }
 
-  .dropdown-menu {
-    display: none;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border: 1px solid #189DAB;
-   }
-   
-   .dropdown:hover {
-     .dropdown-menu {
-       display: block;
-       top: 45px;
-     }
-  }
+        .nav-link:active {
+          text-decoration: underline;
+        }
+      }
 
+      .navbar-nav {
+        .nav-item {
+          #last_link {
+            padding-right: 0;
+            margin-right: 0;
+          }
 
-  .nav-link {
-    color: white;
-    font-size: 1.1rem;
-  }
-
-  .nav-link:hover {
-    text-decoration: underline;
+        }
+      }
+    }
   }
 }
 
