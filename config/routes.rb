@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "books/search", to: "books#search", as: "book_search"
-  # get "authors/search", to: "authors#search", as: "author_search"
+  get "authors/search", to: "authors#search", as: "author_search"
 
   resources :authors
   resources :books

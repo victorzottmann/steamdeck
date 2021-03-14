@@ -5,6 +5,7 @@ class AuthorsController < ApplicationController
 
   def show
     @author = Author.find(params[:id])
+    @books_by_author = Book.where(author_id: @author.id)
   end
 
   def new
@@ -43,7 +44,7 @@ class AuthorsController < ApplicationController
       redirect_to request.referrer
     else
       @name = params[:q].downcase
-      @authors = Author.where("lower(title) LIKE ?", "%#{@name}%")
+      @authors = Author.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{@name}%")
     end
   end
 
