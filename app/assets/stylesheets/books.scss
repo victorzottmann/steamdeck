@@ -1,3 +1,68 @@
 // Place all the styles related to the Books controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+@mixin flex-center-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.show-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  position: relative;
+  top: 50px;
+  
+  .show-img-top {
+    border: 1px solid black;
+    width: 200px;
+    height: 300px;
+  }
+
+  .book-description {
+    width: 70vh;
+  }
+
+  .basket {
+    @include flex-center-column();
+    width: 350px;
+    // padding: 15px;
+    // border: 1px solid black;
+    
+    .basket-links {
+      @include flex-between-column();
+      width: 100%;
+      
+      .btn {
+        background-color: #189DAB;
+        border-color: black;
+        width: 70%;
+        font-size: 1.1rem;
+      }
+
+      h4 {
+        margin-bottom: 0;
+      }
+    }
+
+    .map-heading {
+      align-self: flex-start;
+    }
+
+    #map { 
+      width: 100%;
+      height: 250px; 
+    }
+
+  }
+}
