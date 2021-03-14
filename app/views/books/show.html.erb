@@ -9,13 +9,12 @@
     <h4><%= @book.title.upcase %></h4>
     <p>By <%= @book.author.first_name %> <%= @book.author.last_name %></p>
     <p>Format: <%= @book.format %></p>
-    <br>
     
-    <% if !@book.user && !current_user %>
+    <% if @book.user || has_role?(:admin) %>
       <span><%= link_to "Edit", edit_book_path %> |</span>
       <span><%= link_to "Delete", @book, method: :delete, data: { confirm: 'Are you sure?' } %></span>
-      <br>
     <% end %>
+    <br><br>
 
     <div class="book-description col-md-7 order-md-2">
       <h5>Summary</h5>

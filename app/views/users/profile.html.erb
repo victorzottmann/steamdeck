@@ -13,7 +13,10 @@
       <% end%>
     </div>
     <div class="card-body">
-      <h5 class="card-title"><%= @user.first_name %> <%= @user.last_name %> (<%= @user.username %>)</h5>
+      <h5 class="card-title"><%= @user.first_name %> <%= @user.last_name %></h5>
+      <% if has_role?(:admin) %>
+        <p style="text-align: center;">Admin</p>
+      <% end %>
       <div class="options-container">
         <%= link_to "Edit Profile", edit_user_path, class: "btn" %>
         <%= link_to "Account Settings", edit_user_registration_path, class: "btn" %>

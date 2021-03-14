@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+$link-color: #1B73F9;
+
 @mixin flex-center {
   display: flex;
   justify-content: center;
@@ -39,11 +41,16 @@
       }
 
       .card-title:hover {
-        color: #1B73F9;
+        color: $link-color;
+      }
+      
+      .card-text {
+        text-decoration: none;
+        color: black;
       }
 
-      .card-text {
-        text-align: center;
+      .card-text:hover {
+        color: $link-color;
       }
     }
 

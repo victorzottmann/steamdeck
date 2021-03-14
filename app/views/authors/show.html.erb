@@ -1,14 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <h3 class="hero-title text-center m-5">Books by <%= @author.first_name %> <%= @author.last_name %></h3>
+</div>
 
-<p>
-  <strong>First name:</strong>
-  <%= @author.first_name %>
-</p>
+<div class="cards-container">
 
-<p>
-  <strong>Last name:</strong>
-  <%= @author.last_name %>
-</p>
+  <% @books_by_author.each do |book|%>
+    <div class="card" style="width: 15rem;">
+      <%= link_to image_tag(book.picture, class: "card-img-top"), book_path(book.id) if book.picture.attached? %>
+      <div class="card-body">
+        <h6><%= link_to "#{book.title}", book_path(book.id), class: "card-title" %></h6>
+        <p style="text-align: center;"><%= link_to "#{book.author.first_name} #{book.author.last_name}", author_path(book.author.id), class: "card-text" %></p>
+        <hr>
+        <div class="action-icons">
+          <div class="swap-action">
+            <p>Exchange</p> 
+            <%= link_to image_tag("icons/swap.svg", class: "swap-icon"), books_path %>
+          </div>
+          <br>
+          <% if !book.user.id %>
+            <div class="basket-action">
+              <p>Add to Basket</p>
+              <%= link_to image_tag("icons/basket.svg", class: "basket-icon"), books_path %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
-<%= link_to 'Edit', edit_author_path(@author) %> |
-<%= link_to 'Back', authors_path %>
+</div>
