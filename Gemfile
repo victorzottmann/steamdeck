@@ -57,6 +57,10 @@ gem 'jquery-rails'
 # add devise for user authentication
 gem "devise", "~> 4.7"
 
+# add rolify and cancancan to manage user roles (e.g. admin vs customer)
+gem "rolify", "~> 5.3"
+gem "cancancan", "~> 3.2"
+
 # add AWS S3 bucket
 gem "aws-sdk-s3", "~> 1.91"
 
@@ -65,3 +69,4 @@ gem "stripe", "~> 5.30"
 
 # add ultrahook for webhook endpoints
 gem "ultrahook", "~> 1.0"
+

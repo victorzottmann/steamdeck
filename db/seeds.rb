@@ -63,6 +63,33 @@ end
 # end
 
 
+#====== USERS ======#
+if User.count == 0
+  user1 = User.create(
+    first_name: "Victor",
+    last_name: "Zottmann",
+    email: "victor@email.com",
+    password: "000000",
+  )
+  # add admin authorization to user1
+  user1.add_role "admin"
+  user1.save!
+  
+  user2 = User.create(
+    first_name: "Mark",
+    last_name: "Johnson",
+    email: "mark@email.com",
+    password: "000000"
+  )
+
+  user3 = User.create(
+    first_name: "John",
+    last_name: "Markson",
+    email: "john@email.com",
+    password: "000000"
+  )
+end
+
 
 #====== AUTHORS ======#
 if Author.count == 0
@@ -98,31 +125,6 @@ if Publisher.count == 0
   publisher2 = Publisher.create(name: "Basic Books") # book2
   publisher3 = Publisher.create(name: "Pragmatic Bookshelf") # book3
   publisher4 = Publisher.create(name: "Silman-James Press") # book4
-end
-
-
-#====== USERS ======#
-if User.count == 0
-  user1 = User.create(
-    first_name: "Victor",
-    last_name: "Zottmann",
-    email: "victor@email.com",
-    password: "123456"
-  )
-
-  user2 = User.create(
-    first_name: "Mark",
-    last_name: "Johnson",
-    email: "markj@email.com",
-    password: "123456"
-  )
-
-  user3 = User.create(
-    first_name: "John",
-    last_name: "Markson",
-    email: "johnm@email.com",
-    password: "123456"
-  )
 end
 
 
