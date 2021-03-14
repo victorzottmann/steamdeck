@@ -1,69 +1,70 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
+<div class="show-content">
+  <div>
+    <%= image_tag @book.picture, class: "show-img-top" if @book.picture.attached? %>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @book.description %>
-</p>
+  <div class="book-info">
+    <h4><%= @book.title.upcase %></h4>
+    <p>By <%= @book.author.name %></p>
+    <p>Format: <%= @book.format %></p>
+    <br>
+    
+    <% if !@book.user && !current_user %>
+      <span><%= link_to "Edit", edit_book_path %> |</span>
+      <span><%= link_to "Delete", @book, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+      <br>
+    <% end %>
 
-<p>
-  <strong>Edition:</strong>
-  <%= @book.edition %>
-</p>
+    <div class="book-description col-md-7 order-md-2">
+      <h5>Summary</h5>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias inventore adipisci eligendi excepturi quod. Fugiat nihil culpa, quis minima magni recusandae esse aliquid optio, expedita aspernatur deserunt earum perferendis repellendus!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias inventore adipisci eligendi excepturi quod. Fugiat nihil culpa, quis minima magni recusandae esse aliquid optio, expedita aspernatur deserunt earum perferendis repellendus!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias inventore adipisci eligendi excepturi quod. Fugiat nihil culpa, quis minima magni recusandae esse aliquid optio, expedita aspernatur deserunt earum perferendis repellendus!
+      </p>
+    </div>
+  </div>
+  
+  <div class="basket">  
+    <div class="basket-links">
+      <% if !@book.user && !current_user %>
+        <%= link_to "Add to Cart", "#", class: "basket-text btn btn-primary", id: "basket-button" %>
+        <br><br>
+      <% end %>
 
-<p>
-  <strong>Pages:</strong>
-  <%= @book.pages %>
-</p>
+      <%#= link_to "Exchange with Someone", "#", class: "basket-text btn btn-primary", id: "exchange-button" %>
+      <%# if @book.available %>
+      <%# end %>
 
-<p>
-  <strong>Date:</strong>
-  <%= @book.date %>
-</p>
+      <% if user_signed_in? %>
+        <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= @book.price %></button>
+      <% else %>
+        <%= button_to "Rent for #{@book.price}", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
+      <% end %>
+      <br><br>
+    </div>
 
-<p>
-  <strong>Format:</strong>
-  <%= @book.format %>
-</p>
+    <h5 class="map-heading">Locations Available for Pickup:</h5>
+    <div id="map">
+      <%= javascript_pack_tag "leaflet/index" %>
+    </div>
+  </div>
 
-<p>
-  <strong>Price:</strong>
-  <%= @book.price %>
-</p>
+</div>
 
-<p>
-  <strong>Quantity:</strong>
-  <%= @book.quantity %>
-</p>
 
-<p>
-  <strong>Available:</strong>
-  <%= @book.available %>
-</p>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
+      var stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+      );
 
-<p>
-  <strong>Author:</strong>
-  <%= @book.author_id %>
-</p>
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      });
+    });
+</script>
 
-<p>
-  <strong>Category:</strong>
-  <%= @book.category_id %>
-</p>
-
-<p>
-  <strong>Publisher:</strong>
-  <%= @book.publisher_id %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @book.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>

@@ -1,82 +1,73 @@
-<%= form_with(model: book, local: true) do |form| %>
-  <% if book.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
 
-      <ul>
-        <% book.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<!-- Form to create new book -->
+<div class="form-container">
+  <%= form_with(model: @book, local: true) do |form| %>
+    <% if @book.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+      
+    <div class="field">
+      <%= form.label :picture %>
+      <%= form.file_field :picture, accept: "image/png, image/jpg, image/jpeg" %>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= form.label :category %>
+      <%= form.collection_select(:category_id, @categories, :id, :name, prompt: true, class: "form-control") %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label "Price (max $5):" %>
+      <%= form.number_field :price, min: 0, max: 5, class: "form-control", autocomplete: "off" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "form-control", autocomplete: "off" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.fields_for :author do |f| %>
+        <%= f.label :author %>
+        <%= f.text_field :name, class: "form-control", autocomplete: "off" %>
+      <% end %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.fields_for :publisher do |f| %>
+        <%= f.label :publisher %>
+        <%= f.text_field :name, class: "form-control", autocomplete: "off" %>
+      <% end %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :edition %>
+      <%= form.number_field :edition, class: "form-control", autocomplete: "off" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :pages %>
+      <%= form.number_field :pages, class: "form-control", autocomplete: "off" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label "Publication date (dd-mm-yyyy)" %>
+      <%= form.text_field :date, class: "form-control", autocomplete: "off" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :format %>
+      <%= form.text_field :format, class: "form-control", autocomplete: "off" %>
+    </div>
+    <br>
+    <div class="actions">
+      <%= form.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :edition %>
-    <%= form.number_field :edition %>
-  </div>
-
-  <div class="field">
-    <%= form.label :pages %>
-    <%= form.number_field :pages %>
-  </div>
-
-  <div class="field">
-    <%= form.label :date %>
-    <%= form.date_select :date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :format %>
-    <%= form.text_field :format %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :quantity %>
-    <%= form.number_field :quantity %>
-  </div>
-
-  <div class="field">
-    <%= form.label :available %>
-    <%= form.check_box :available %>
-  </div>
-
-  <div class="field">
-    <%= form.label :author_id %>
-    <%= form.text_field :author_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :category_id %>
-    <%= form.text_field :category_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :publisher_id %>
-    <%= form.text_field :publisher_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
