@@ -66,16 +66,35 @@ end
 
 #====== AUTHORS ======#
 if Author.count == 0
-  author1 = Author.create(name: "Marc Asselineau") #book1
-  author2 = Author.create(name: "Don Norman") #book2
-  author3 = Author.create(name: "Chris Pine") #book3
-  author3 = Author.create(name: "Walter Murch") #book4
+  # author1, book1
+  author1 = Author.create(
+    first_name: "Marc", 
+    last_name: "Asselineau"
+  ) 
+    
+  # author2, book2
+  author2 = Author.create( 
+    first_name: "Don",
+    last_name: "Norman"
+  ) 
+
+  # author3, book3
+  author3 = Author.create(
+    first_name: "Chris",
+    last_name: "Pine"
+  ) 
+
+  # author4, book4
+  author4 = Author.create(
+    first_name: "Walter",
+    last_name: "Murch"
+  ) 
 end
 
 
 #====== PUBLISHERS ======#
 if Publisher.count == 0
-  publisher1 = Publisher.create(name: "CRC Press") #book1
+  publisher1 = Publisher.create(name: "CRC Press") # book1
   publisher2 = Publisher.create(name: "Basic Books") # book2
   publisher3 = Publisher.create(name: "Pragmatic Bookshelf") # book3
   publisher4 = Publisher.create(name: "Silman-James Press") # book4
