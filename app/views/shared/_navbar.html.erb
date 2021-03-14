@@ -1,0 +1,53 @@
+
+<nav class="navbar navbar-expand-lg navbar-fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse"">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item" id="first-item">
+          <%= link_to 'Home', root_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link mx-auto dropdown-toggle" id="dropdown-link" href="#" data-bs-toggle="dropdown" aria-expanded="false">Browse by Category</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown07">
+            <li><%= link_to 'Creative Arts', creative_arts_path, class: "dropdown-item" %></li>
+            <li><%= link_to 'Design', design_path, class: "dropdown-item" %></li>
+            <li><%= link_to 'Information Technology', tech_path, class: "dropdown-item" %></li>
+            <li><%= link_to 'Science', science_path, class: "dropdown-item" %></li>
+          </ul>
+        </li>
+
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'Edit Categories', categories_path, class: "nav-link" %>
+          </li>
+          
+          <li class="nav-item">
+            <%= link_to 'Create Book', new_book_path, class: "nav-link" %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to 'Cart', user_profile_path, class: "nav-link" %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to 'My Profile', user_profile_path, class: "nav-link" %>
+          </li>
+        <% end %>
+       
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= link_to 'Log out', destroy_user_session_path, method: "delete", class: "nav-link" %>
+          <% else %>
+            <%= link_to 'Log in', new_user_session_path, class: "nav-link" %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
