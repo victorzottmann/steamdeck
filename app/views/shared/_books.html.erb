@@ -6,7 +6,7 @@
       <%= link_to image_tag(book.picture, class: "card-img-top"), book_path(book.id) if book.picture.attached? %>
       <div class="card-body">
         <h6><%= link_to "#{book.title}", book_path(book.id), class: "card-title" %></h6>
-        <p class="card-text"><%= book.author.name %></p>
+        <p class="card-text"><%= book.author.first_name %> <%= book.author.last_name %></p>
         <hr>
         <div class="action-icons">
           <div class="swap-action">

@@ -7,10 +7,11 @@
     <% if @user.profile_picture.attached? %>
       <%= image_tag @user.profile_picture, class: "edit-picture" %>
     <% else %>
-      <p class="picture-text">You don't have a profile picture!</p>
+      <p class="picture-text">You don't have a profile picture yet.</p>
       <br>
     <% end %>
     <br>
     <%= render "form" %>
   </div>
 </div>
+<br><br>

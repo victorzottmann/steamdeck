@@ -35,7 +35,12 @@
     <div class="field">
       <%= form.fields_for :author do |f| %>
         <%= f.label :author %>
-        <%= f.text_field :name, class: "form-control", autocomplete: "off" %>
+        <br>
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, class: "form-control", autocomplete: "off" %>
+        <br>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: "form-control", autocomplete: "off" %>
       <% end %>
     </div>
     <br>
