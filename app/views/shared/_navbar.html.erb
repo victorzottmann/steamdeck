@@ -6,10 +6,10 @@
     </button>
 
     <div class="collapse navbar-collapse"">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto">
 
-        <li class="nav-item" id="first-item">
-          <%= link_to 'Home', root_path, class: "nav-link" %>
+        <li class="nav-item">
+          <%= link_to 'Home', root_path, class: "nav-link active", id: "first-link" %>
         </li>
 
         <li class="nav-item dropdown">
@@ -25,30 +25,44 @@
         <% if user_signed_in?%>
           <% if has_role?(:admin) %>
             <li class="nav-item">
-              <%= link_to 'Edit Categories', categories_path, class: "nav-link" %>
+              <%= link_to 'Edit Categories', categories_path, class: "nav-link active" %>
             </li>
           <% end %>
-          
-          <li class="nav-item">
-            <%= link_to 'Create Book', new_book_path, class: "nav-link" %>
-          </li>
-
-          <li class="nav-item">
-            <%= link_to 'Cart', user_profile_path, class: "nav-link" %>
-          </li>
-
-          <li class="nav-item">
-            <%= link_to 'My Profile', user_profile_path, class: "nav-link" %>
-          </li>
         <% end %>
+
+        <li class="nav-item">
+          <%= link_to 'Create Book', new_book_path, class: "nav-link active" %>
+        </li>
+      </ul> 
+
+      <ul class="navbar-nav mr-auto">
        
+        <li class="nav-item dropdown">
+          <a class="nav-link mx-auto dropdown-toggle" id="dropdown-link" href="#" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown07">
+            <%= link_to 'My Profile', user_profile_path, class: "dropdown-item" %>
+            <% if user_signed_in? %>
+              <%= link_to 'Log out', destroy_user_session_path, method: "delete", class: "dropdown-item" %>
+            <% else %>
+              <%= link_to 'Log in', new_user_session_path, class: "dropdown-item" %>
+            <% end %>
+          </ul>
+          <li class="nav-item">
+            <%= link_to 'My Cart', "#", class: "nav-link active" %>
+          </li>
+        </li>
+
+        <!-- <li class="nav-item">
+          <%= link_to 'Cart', user_profile_path, class: "nav-link active" %>
+        </li>
+
         <li class="nav-item">
           <% if user_signed_in? %>
-            <%= link_to 'Log out', destroy_user_session_path, method: "delete", class: "nav-link" %>
+            <%= link_to 'Log out', destroy_user_session_path, method: "delete", class: "nav-link active", id: "last-link" %>
           <% else %>
-            <%= link_to 'Log in', new_user_session_path, class: "nav-link" %>
+            <%= link_to 'Log in', new_user_session_path, class: "nav-link active", id: "last-link" %>
           <% end %>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
