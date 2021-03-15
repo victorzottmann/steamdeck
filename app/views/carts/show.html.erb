@@ -1,14 +1,22 @@
 
 <%= render "line_items/line_item" %>
 
-<%= button_to 'Empty Cart', @cart, method: :delete, data: { confirm: "Are you sure? " }, class: "button is-danger" %>
+<% if @cart.line_items.count <= 0 %>
+  <% @cart.destroy %>
+  <%= redirect_to root_path %>
+  <%#= button_to 'Delete Cart', @cart, method: :delete, data: { confirm: "Are you sure? " }, class: "button is-danger" %>
+<% else %>
+  <%= button_to 'Empty Cart', @cart, method: :delete, data: { confirm: "Are you sure? " }, class: "button is-danger" %>
+<% end %>
     
 <span class="f5 has-text-grey">Total:</span> <%= number_to_currency(@cart.total_price) %>
 
 <br><br>
 
 <% if user_signed_in? %>
-    <button data-stripe="payment" class="basket-text btn btn-primary">Checkout</button>
+    <% if @cart.line_items.count > 0 %>
+      <button data-stripe="payment" class="basket-text btn btn-primary">Checkout</button>
+    <% end %>
 <% else %>
     <%= button_to "Checkout", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
 <% end %>
