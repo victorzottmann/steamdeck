@@ -49,9 +49,11 @@
             <% end %>
           </ul>
 
-          <li class="nav-item">
-            <%= link_to 'My Cart', cart_path(@cart.id), class: "nav-link active" %>
-          </li>
+          <% if cart_has_items %>
+            <li class="nav-item">
+              <%= link_to "My Cart (#{cart_count})", cart_path(@cart.id), class: "nav-link active" %>
+            </li>
+          <% end %>
         </li>
       </ul>
 
