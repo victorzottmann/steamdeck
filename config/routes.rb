@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :line_items
+  resources :carts
   get "books/search", to: "books#search", as: "book_search"
   get "authors/search", to: "authors#search", as: "author_search"
 
