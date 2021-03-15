@@ -24,7 +24,7 @@ class LineItemsController < ApplicationController
 
  
   def create
-    book = Book.find(params[:id])
+    book = Book.find(params[:book_id])
     @line_item = @cart.add_book(book)
 
     respond_to do |format|

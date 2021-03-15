@@ -28,11 +28,12 @@
   
   <div class="basket">  
     <div class="basket-links">
-      <% if user_signed_in? %>
+      <%= button_to "Add to Cart", line_items_path(book_id: @book), class: "basket-text btn btn-primary" %>
+      <!-- <% if user_signed_in? %>
         <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= @book.price %></button>
       <% else %>
         <%= button_to "Rent for #{@book.price}", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
-      <% end %>
+      <% end %> --> 
     </div>
     <br><br><br>
     <div class="map-container">

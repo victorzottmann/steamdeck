@@ -6,7 +6,7 @@ class Cart < ApplicationRecord
     if current_book
       current_book.increment(:quantity)
     else
-      current_book = line_items.build(book_id: book_id)
+      current_book = line_items.build(book_id: book.id)
     end
     current_book
   end
