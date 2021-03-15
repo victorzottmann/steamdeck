@@ -5,8 +5,7 @@ class Book < ApplicationRecord
   belongs_to :user
 
   has_one_attached :picture
-
-  # enum condition: {damaged: 0, used: 1, good: 2, excellent: 3}
+  has_many :line_items
 
   accepts_nested_attributes_for :author
   accepts_nested_attributes_for :publisher
