@@ -24,6 +24,7 @@ class LineItemsController < ApplicationController
 
  
   def create
+    @cart = current_cart
     book = Book.find(params[:book_id])
     @line_item = @cart.add_book(book)
 

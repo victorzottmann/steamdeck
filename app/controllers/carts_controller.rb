@@ -9,6 +9,28 @@ class CartsController < ApplicationController
 
   
   def show
+
+    # if user_signed_in?
+    #   session = Stripe::Checkout::Session.create(
+    #     payment_method_types: ['card'],
+    #     customer_email: current_user.email,
+    #     line_items: [{
+    #       name: line_item.book.title,
+    #       amount: (@book.price * 100),
+    #       currency: 'aud',
+    #       quantity: 1
+    #     }],
+    #     payment_intent_data: {
+    #       metadata: {
+    #         user_id: current_user.id,
+    #         book_id: @book.id
+    #       }
+    #     },
+    #     success_url: "#{root_url}payments/success?bookId=#{@book.id}",
+    #     cancel_url: "#{root_url}books"
+    #   )
+    #   @session_id = session.id
+    # end
   end
 
 
@@ -52,6 +74,7 @@ class CartsController < ApplicationController
   def destroy
     @cart.destroy if @cart.id == session[:cart_id]
     session[:cart_id] = nil
+    
     respond_to do |format|
       format.html { redirect_to root_path, notice: "Cart was successfully destroyed." }
       format.json { head :no_content }
