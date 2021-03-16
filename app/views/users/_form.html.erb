@@ -1,6 +1,6 @@
 
 <div class="form-container">
-  <%= form_with(model: @user, url: edit_user_path, local: true) do |form| %>
+  <%= form_with(model: @user, url: edit_user_path(@user), local: true) do |form| %>
     <br>
     <div class="field">
       <%= form.label :upload_picture %> <br>
