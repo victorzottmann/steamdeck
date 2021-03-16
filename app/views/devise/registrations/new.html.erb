@@ -4,7 +4,12 @@
 
 <div class="registration-container">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%#= render "devise/shared/error_messages", resource: resource %>
+    <% if resource.errors.any? %>
+      <h5>Error!</h5>
+      <% resource.errors.full_messages.each do |message| %>
+        <li class="error-message"><%= message %></li><br>
+      <% end %>
+    <% end %>
     <div class="first-last-names">
       <div>
         <%= f.label :first_name %>

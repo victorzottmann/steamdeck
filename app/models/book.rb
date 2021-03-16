@@ -14,6 +14,11 @@ class Book < ApplicationRecord
 
   resourcify
 
+  validates :title, presence: true
+  validates :description, length: { maximum: 500 }
+  validates :format, format: { with: /\A[a-zA-Z]+\z/, message: "Only letters are allowed"}
+  validates :edition, :pages, :price, :quantity, numericality: { only_integer: true }
+
   private
 
     def not_referenced_by_any_line_item
