@@ -23,8 +23,8 @@
     </div>
     <br>
     <div class="field">
-      <%= form.label "Price (max $5):" %>
-      <%= form.number_field :price, min: 0, max: 5, class: "form-control", autocomplete: "off" %>
+      <%= form.label "Rent Price (min $5, max $20)" %>
+      <%= form.number_field :price, min: 1, max: 15, class: "form-control", autocomplete: "off" %>
     </div>
     <br>
     <div class="field">
@@ -69,6 +69,11 @@
     <div class="field">
       <%= form.label :format %>
       <%= form.text_field :format, class: "form-control", autocomplete: "off" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :quantity %>
+      <%= form.text_field :quantity, class: "form-control", autocomplete: "off" %>
     </div>
     <br>
     <div class="actions">

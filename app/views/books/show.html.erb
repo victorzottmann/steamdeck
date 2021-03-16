@@ -2,6 +2,7 @@
 <div class="show-content">
   <div>
     <%= image_tag @book.picture, class: "show-img-top" if @book.picture.attached? %>
+    <br><br>
   </div>
 
   <div class="book-info">
@@ -31,6 +32,8 @@
       <% if user_signed_in? %>
         <h4>Sold by</h4><br>
         <%= link_to "#{@user.first_name} #{@user.last_name}", user_profile_path %>
+        <br><br>
+        <h5>Quantity available: <%= @book.quantity %></h5>
         <hr>
         <%= button_to "Add to Cart", line_items_path(book_id: @book), class: "basket-text btn btn-primary" %>
       <% else %>

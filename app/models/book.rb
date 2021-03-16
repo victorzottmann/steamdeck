@@ -17,7 +17,7 @@ class Book < ApplicationRecord
   validates :title, presence: true
   validates :description, length: { maximum: 500 }
   validates :format, format: { with: /\A[a-zA-Z]+\z/, message: "Only letters are allowed"}
-  validates :edition, :pages, :price, :quantity, numericality: { only_integer: true }
+  validates :edition, :pages, :price, numericality: { only_integer: true }
 
   private
 
