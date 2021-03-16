@@ -27,7 +27,11 @@
   
   <div class="basket">  
     <div class="basket-links">
+     <% if user_signed_in? %>
       <%= button_to "Add to Cart", line_items_path(book_id: @book), class: "basket-text btn btn-primary" %>
+    <% else %>
+      <%= button_to "Add to Cart", new_user_registration_path, class: "basket-text btn btn-primary" %>
+    <% end %>
       <!-- <% if user_signed_in? %>
         <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= @book.price %></button>
       <% else %>
