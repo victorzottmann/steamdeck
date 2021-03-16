@@ -9,11 +9,12 @@
     <p>By <%= link_to "#{@book.author.first_name} #{@book.author.last_name}", author_path(@book.author.id) %></p>
     <p>Format: <%= @book.format %></p>
     
-    <% if @book.user || has_role?(:admin) %>
+    <% if (user_signed_in? && @book.user) || has_role?(:admin) %>
       <span><%= link_to "Edit", edit_book_path %> |</span>
       <span><%= link_to "Delete", @book, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+      <br>
     <% end %>
-    <br><br>
+    <br>
 
     <div class="book-description col-md-7 order-md-2">
       <h5>Summary</h5>
@@ -27,18 +28,21 @@
   
   <div class="basket">  
     <div class="basket-links">
-     <% if user_signed_in? %>
-      <%= button_to "Add to Cart", line_items_path(book_id: @book), class: "basket-text btn btn-primary" %>
-    <% else %>
-      <%= button_to "Add to Cart", new_user_registration_path, class: "basket-text btn btn-primary" %>
-    <% end %>
+      <% if user_signed_in? %>
+        <h4>Sold by</h4><br>
+        <%= link_to "#{@user.first_name} #{@user.last_name}", user_profile_path %>
+        <hr>
+        <%= button_to "Add to Cart", line_items_path(book_id: @book), class: "basket-text btn btn-primary" %>
+      <% else %>
+        <%= button_to "Add to Cart", new_user_registration_path, class: "basket-text btn btn-primary" %>
+      <% end %>
       <!-- <% if user_signed_in? %>
         <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= @book.price %></button>
       <% else %>
         <%= button_to "Rent for #{@book.price}", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
       <% end %> --> 
     </div>
-    <br><br><br>
+    <br><br><br><br>
     <div class="map-container">
       <h5 class="map-heading">Locations Available for Pickup:</h5>
       <div id="map">

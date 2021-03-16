@@ -54,43 +54,27 @@ $link-color: #1B73F9;
       }
     }
 
-    .action-icons {
+    .cart-container {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       // border: 1px solid black;
 
-      .swap-action {
+      .cart-content {
         display: flex;
         justify-content: space-between; 
         
-        p {
-          margin-bottom: 0;
+        .cart-text {
+          position: relative;
+          top: 5px;
         }
 
-        .swap-icon {
-          width: 1.7em;
+        .cart-icon {
+          width: 2em;
           fill: black;
         }
       }
-
-      .basket-action {
-        display: flex;
-        justify-content: space-between;
-        
-        p {
-          margin-bottom: 0;
-        }
-        
-        .basket-icon {
-          margin-top: 0;
-          width: 1.6em;
-          fill: orange;
-        }
-      }
-
     }
-
 
     .btn {
       margin-bottom: 10px;

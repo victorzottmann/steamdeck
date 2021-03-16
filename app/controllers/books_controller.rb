@@ -11,6 +11,7 @@ class BooksController < ApplicationController
  
   def show
     @book = Book.find(params[:id])
+    @user = current_user
 
     if user_signed_in?
       session = Stripe::Checkout::Session.create(
