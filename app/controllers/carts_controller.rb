@@ -9,6 +9,32 @@ class CartsController < ApplicationController
 
   
   def show
+    @books = current_user.carts.last.books
+    line_items = @books.map do |book|
+      {
+        name: book.title,
+        amount: (book.price * 100),
+        currency: 'aud',
+        quantity: 1
+      }
+    end
+
+    if user_signed_in?
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        customer_email: current_user.email,
+        line_items: line_items,
+        # payment_intent_data: {
+        #   metadata: {
+        #     user_id: current_user.id,
+        #     book_id: @book.id
+        #   }
+        # },
+        success_url: "#{root_url}payments/success",
+        cancel_url: "#{root_url}books"
+      )
+      @session_id = session.id
+    end
   end
 
 
@@ -19,28 +45,6 @@ class CartsController < ApplicationController
 
   def create
     @cart = Cart.new(cart_params)
-
-    respond_to do |format|
-      if @cart.save
-        format.html { redirect_to @cart, notice: "Cart was successfully created." }
-        format.json { render :show, status: :created, location: @cart }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-
-  def update
-    respond_to do |format|
-      if @cart.update(cart_params)
-        format.html { redirect_to @cart, notice: "Cart was successfully updated." }
-        format.json { render :show, status: :ok, location: @cart }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
     end
   end
 
@@ -57,9 +61,10 @@ class CartsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_cart
       @cart = Cart.find(params[:id])
+      # @cart = Cart.where(user_id: current_user.id)
     end
 
     # Only allow a list of trusted parameters through.

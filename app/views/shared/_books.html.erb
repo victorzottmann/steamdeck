@@ -9,8 +9,7 @@
         <hr>
         <div class="cart-container">
           <div class="cart-content">
-            <p class="cart-text">Add to Cart</p> 
-            <%= link_to image_tag("icons/cart.svg", class: "cart-icon"), line_items_path(book_id: @book) %>
+            <%= button_to "Add to Cart 🧺", line_items_path(book_id: book) %>
           </div>
         </div>
       </div>
