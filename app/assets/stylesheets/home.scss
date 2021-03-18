@@ -54,40 +54,24 @@ $link-color: #1B73F9;
       }
     }
 
-    .cart-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      // border: 1px solid black;
+    .rent-button {
 
-      .cart-content {
-        display: flex;
-        justify-content: space-between; 
-        
-        .cart-text {
-          position: relative;
-          top: 5px;
-        }
-
-        .cart-icon {
-          width: 2em;
-          fill: black;
-        }
+      .btn {
+        background-color: #ff9f1c;
+        color: black;
+        border-color: black;
+        width: 100%;
+        font-size: 1.2rem;
+        height: 47px;
       }
-    }
+  
+      .btn:hover {
+        background-color: #f1981a;
+      }
 
-    .btn {
-      margin-bottom: 10px;
-      width: 60%;
-      height: 40px;
-      background-color: #ffddd2;
-      color: black;
-      border-color: black;
-      font-size: 1.1rem;
-    }
-
-    .btn:hover {
-      background-color: #f5cbbd;
+      .btn:focus {
+        box-shadow: none;
+      }
     }
   }
 }

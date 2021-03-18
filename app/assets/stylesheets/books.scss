@@ -55,6 +55,10 @@
         background-color: #f1981a;
       }
 
+      .btn:focus {
+        box-shadow: none;
+      }
+
       h4 {
         margin-bottom: 0;
       }
