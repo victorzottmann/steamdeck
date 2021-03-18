@@ -13,7 +13,7 @@
     <% if (user_signed_in? && @book.user) || has_role?(:admin) %>
       <span><%= link_to "Edit", edit_book_path %> |</span>
       <span><%= link_to "Delete", @book, method: :delete, data: { confirm: 'Are you sure?' } %></span>
-      <br>
+      <br />
     <% end %>
     <br>
 
@@ -34,18 +34,18 @@
         <%= link_to "#{@user.first_name} #{@user.last_name}", user_profile_path %>
         <br><br>
         <% if @book.available %>
-          <h5 class="book-available">Available: ✅</h5>
-          <hr>
-          <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= @book.price %></button>
+          <h5 class="book-available"><%= @book.quantity %> Units Available ✅</h5><hr />
+          <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= @book.price %> (AUD)</button>
         <% else %>
-          <h5 class="book-unavailable">Unvailable ❌</h5>
-          <hr>
+          <h5 class="book-unavailable">Unvailable ❌</h5><hr />
         <% end %>
       <% else %>
-        <%= button_to "Rent for $#{@book.price}", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
+        <%= button_to "Rent for $#{@book.price} (AUD)", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
       <% end %>
     </div>
+
     <br><br><br><br>
+
     <div class="map-container">
       <h5 class="map-heading">
         Locations Available for Pickup:
@@ -58,8 +58,8 @@
     </div>
   </div>
 </div>
-<br><br><br>
 
+<br><br><br>
 
 <%= render "shared/stripe-btn" %>
 

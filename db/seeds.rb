@@ -137,6 +137,7 @@ if Book.count == 0
     date: "05-02-2014",
     format: "Paperback",
     price: 5.00,
+    quantity: 2,
     available: true,
     author_id: 1, # Marc Asselineau
     publisher_id: 1, # CRC Press
@@ -156,6 +157,7 @@ if Book.count == 0
     date: "05-11-2013",
     format: "Paperback",
     price: 5.00,
+    quantity: 1,
     available: true,
     author_id: 2, # Don Norman
     category_id: 2, # Design
@@ -175,16 +177,17 @@ if Book.count == 0
     date: "10-03-2014",
     format: "Paperback",
     price: 5.00,
+    quantity: 1,
     available: true,
     author_id: 3, # Steven V. Szokolay
-    category_id: 3, # Science
+    category_id: 4, # Science
     publisher_id: 3, # Routledge
     user_id: 3 # John Markson
   )
   book3.picture.attach(
-    io: File.open("app/assets/images/intro-arch-science.jpg"),
-    filename: "intro-arch-science.jpg",
-    content_type: "image/jpg"
+    io: File.open("app/assets/images/intro-arch-science.jpeg"),
+    filename: "intro-arch-science.jpeg",
+    content_type: "image/jpeg"
   )
 
   book4 = Book.create(
@@ -194,6 +197,7 @@ if Book.count == 0
     date: "08-08-2001",
     format: "Paperback",
     price: 5.00,
+    quantity: 3,
     available: true,
     author_id: 4, # Walter Murch
     category_id: 1, # Creative Arts

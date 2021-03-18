@@ -8,12 +8,24 @@
         <p style="text-align: center;"><%= link_to "#{book.author.first_name} #{book.author.last_name}", author_path(book.author.id), class: "card-text" %></p>
         <hr>
         <div class="rent-button">
-          <button data-stripe="payment" class="btn">Rent for $<%= book.price %></button>
+          <button data-stripe='payment' class="btn">Rent for $<%= book.price %> (AUD)</button>
         </div>
       </div>
     </div>
   <% end %>
 </div>
 
-<%= render "shared/stripe-btn" %>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
+      var stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+      );
+
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      });
+    });
+</script>
 
