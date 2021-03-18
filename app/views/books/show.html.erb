@@ -41,21 +41,24 @@
           <h5 class="book-unavailable">Book Unvailable ❌</h5>
           <hr>
         <% end %>
-        <%#= button_to "Add to Cart", line_items_path(book_id: @book), class: "basket-text btn btn-primary" %>
       <% else %>
         <%= button_to "Rent for $#{@book.price}", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
       <% end %>
     </div>
     <br><br><br><br>
     <div class="map-container">
-      <h5 class="map-heading">Locations Available for Pickup:</h5>
+      <h5 class="map-heading">
+        Locations Available for Pickup:
+        <br><br>
+        <p class="location-subs">(click on the pins to view store hours)</p>
+      </h5>
       <div id="map">
         <%= javascript_pack_tag "leaflet/index" %>
       </div>
     </div>
   </div>
-
 </div>
+<br><br><br>
 
 
 <%= render "shared/stripe-btn" %>
