@@ -34,10 +34,10 @@
         <%= link_to "#{@book.user.first_name} #{@book.user.last_name}", user_path(@book.user) %>
         <br><br>
         <% if @book.available %>
-          <h5 class="book-available"><%= @book.quantity %> Units Available ✅</h5><hr />
+          <h5 class="book-available"><%= @book.quantity %> in Stock ✅</h5><hr />
           <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= @book.price %> (AUD)</button>
         <% else %>
-          <h5 class="book-unavailable">Unvailable ❌</h5><hr />
+          <h5 class="book-unavailable">Out of stock ❌</h5><hr />
         <% end %>
       <% else %>
         <%= button_to "Rent for $#{@book.price} (AUD)", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>

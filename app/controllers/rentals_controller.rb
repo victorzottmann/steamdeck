@@ -5,7 +5,8 @@ class RentalsController < ApplicationController
   def show
   end
 
-  def update
-      
-  end
+  # def destroy
+  #   @rental.destroy
+  #   redirect_to request.referrer
+  # end
 end
