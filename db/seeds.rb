@@ -25,7 +25,7 @@ if User.count == 0
     email: "admin@gmail.com",
     password: "000000",
   )
-  user1.picture.attach(
+  user1.profile_picture.attach(
     io: File.open("app/assets/images/users/admin.jpg"),
     filename: "admin.jpg",
     content_type: "image/jpg"
@@ -40,7 +40,7 @@ if User.count == 0
     email: "l@gmail.com",
     password: "000000"
   )
-  user2.picture.attach(
+  user2.profile_picture.attach(
     io: File.open("app/assets/images/users/lily.jpg"),
     filename: "lily.jpg",
     content_type: "image/jpg"
@@ -53,7 +53,7 @@ if User.count == 0
     email: "j@gmail.com",
     password: "000000"
   )
-  user3.picture.attach(
+  user3.profile_picture.attach(
     io: File.open("app/assets/images/users/john.jpg"),
     filename: "john.jpg",
     content_type: "image/jpg"
