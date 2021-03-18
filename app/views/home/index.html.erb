@@ -2,6 +2,23 @@
   <h3 class="hero-title text-center m-5">Recently Added</h3>
 </div>
 
+<div class="cards-container">
+  <% @books.each do |book|%>
+    <div class="card" style="width: 15rem;">
+      <%= link_to image_tag(book.picture, class: "card-img-top"), book_path(book.id) if book.picture.attached? %>
+      <div class="card-body">
+        <h6><%= link_to "#{book.title}", book_path(book.id), class: "card-title" %></h6>
+        <p style="text-align: center;"><%= link_to "#{book.author.first_name} #{book.author.last_name}", author_path(book.author.id), class: "card-text" %></p>
+        <hr>
+        <div class="rent-button">
+          <button data-stripe='payment' class="btn">Rent for $<%= book.price %> (AUD)</button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<%= render "shared/books"%>  
+
+<%= render "shared/stripe-btn" %>
+
 <br><br><br>
