@@ -1,3 +1,4 @@
+
 var mymap = L.map('map').setView([-33.8658567,151.1981942], 12);
 
 
@@ -9,6 +10,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   zoomOffset: -1,
   accessToken: 'pk.eyJ1IjoidnpvdHRtYW5uIiwiYSI6ImNrbTh6cmZ0cTFkN2IydXBiNmZnY2NoM2UifQ.xZGcGO6IhY22ETZajNOoTg'
 }).addTo(mymap);
+
 
 // Chatswood
 L.marker([-33.796751, 151.184798]).addTo(mymap).bindPopup("<p>STEAMdeck Chatswood<br><br> Mon - Fri: 9am to 6pm</p>");

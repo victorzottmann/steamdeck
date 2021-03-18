@@ -12,8 +12,8 @@
         <hr>
         <div class="cart-container">
           <div class="cart-content">
-            <p class="cart-text">Add to Cart</p> 
-            <%= link_to image_tag("icons/cart.svg", class: "cart-icon"), line_items_path(book_id: @book) %>
+            <p class="cart-text">Kindly shared by</p> 
+            <%= link_to "#{book.user.first_name} #{book.user.last_name}", user_path(book.user), class: "cart-text" %>
           </div>
         </div>
       </div>

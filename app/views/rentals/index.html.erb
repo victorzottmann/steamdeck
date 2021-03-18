@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <h2 class="hero-title text-center m-5">Current Rentals</h2>
+</div>
+
+<br><br>
+
+<div class="cards-container">
+  <% current_user.rentals.each do |rental|%>
+    <div class="card" style="width: 15rem;">
+      <%= link_to image_tag(rental.book.picture, class: "card-img-top") if rental.book.picture.attached? %>
+      <div class="card-body">
+        <h6><%= link_to "#{rental.book.title}", book_path(rental.book.id), class: "card-title" %></h6>
+        <p style="text-align: center;"><%= link_to "#{rental.book.author.first_name} #{rental.book.author.last_name}", author_path(rental.book.author.id), class: "card-text" %></p>
+        <hr>
+        <div class="card-text">
+          <p><%= link_to "View", book_path(rental.book.id) %> | <%= link_to "Return", rental_path(rental.book.id) %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<br><br>

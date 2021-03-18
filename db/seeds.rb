@@ -17,101 +17,71 @@ if Category.count == 0
 end
 
 
-#====== SUBCATEGORIES ====== Not using them at this stage #
-# arts_subcategories = [
-#   "Audio",
-#   "Filmmaking",
-#   "Film & Video Editing",
-#   "Music",
-#   "Photography",
-#   "Visual Effects"
-# ]
-
-# design_subcategories = [
-#   "Architecture",
-#   "Illumination Design",
-#   "Interaction Design"
-# ]
-
-# tech_subcategories = [
-#   "Interactive Media",
-#   "Mobile App Development",
-#   "Web Development"
-# ]
-
-# science_subcategories = [
-#   "Acoustics",
-#   "Architectural Science"
-# ]
-
-# if Subcategory.count == 0
-#   arts_subcategories.each do |type|
-#     Subcategory.create(name: type, category_id: 1)
-#   end
-
-#   design_subcategories.each do |type|
-#     Subcategory.create(name: type, category_id: 2)
-#   end
-
-#   tech_subcategories.each do |type|
-#     Subcategory.create(name: type, category_id: 3)
-#   end
-  
-#   science_subcategories.each do |type|
-#     Subcategory.create(name: type, category_id: 4)
-#   end
-# end
-
-
 #====== USERS ======#
 if User.count == 0
   user1 = User.create(
     first_name: "Victor",
     last_name: "Zottmann",
-    email: "admin@email.com",
+    email: "admin@gmail.com",
     password: "000000",
   )
-  # set admin access to user1
-  user1.add_role "admin"
-  user1.save!
-  
+  user1.profile_picture.attach(
+    io: File.open("app/assets/images/users/admin.jpg"),
+    filename: "admin.jpg",
+    content_type: "image/jpg"
+  )
+  user1.add_role "admin" # set admin access to user1
+  user1.save
+
+
   user2 = User.create(
-    first_name: "Mark",
-    last_name: "Johnson",
-    email: "mark@email.com",
+    first_name: "Lily",
+    last_name: "Dawson",
+    email: "l@gmail.com",
     password: "000000"
   )
+  user2.profile_picture.attach(
+    io: File.open("app/assets/images/users/lily.jpg"),
+    filename: "lily.jpg",
+    content_type: "image/jpg"
+  )
+
 
   user3 = User.create(
     first_name: "John",
     last_name: "Markson",
-    email: "john@email.com",
+    email: "j@gmail.com",
     password: "000000"
+  )
+  user3.profile_picture.attach(
+    io: File.open("app/assets/images/users/john.jpg"),
+    filename: "john.jpg",
+    content_type: "image/jpg"
   )
 end
 
 
 #====== AUTHORS ======#
 if Author.count == 0
-  # author1, book1
+  # author1 => book1
   author1 = Author.create(
     first_name: "Marc", 
     last_name: "Asselineau"
   ) 
     
-  # author2, book2
+  # author2 => book2
   author2 = Author.create( 
     first_name: "Don",
     last_name: "Norman"
   ) 
 
-  # author3, book3
+  # author3 => book3
   author3 = Author.create(
     first_name: "Steven",
     last_name: "V. Szokolay"
   ) 
 
-  # author4, book4
+  # author4 => book4
   author4 = Author.create(
     first_name: "Walter",
     last_name: "Murch"
@@ -142,7 +112,7 @@ if Book.count == 0
     author_id: 1, # Marc Asselineau
     publisher_id: 1, # CRC Press
     category_id: 4, # Science
-    user_id: 2 # Mark Johnson
+    user_id: 1 # Mark Johnson
   )
   book1.picture.attach(
     io: File.open("app/assets/images/building-acoustics.jpg"),
@@ -162,7 +132,7 @@ if Book.count == 0
     author_id: 2, # Don Norman
     category_id: 2, # Design
     publisher_id: 2, # Basic Books
-    user_id: 2 # Mark Johnson
+    user_id: 2 # Lily Dawson
   )
   book2.picture.attach(
     io: File.open("app/assets/images/design-everyday.jpg"),
@@ -182,7 +152,7 @@ if Book.count == 0
     author_id: 3, # Steven V. Szokolay
     category_id: 4, # Science
     publisher_id: 3, # Routledge
-    user_id: 3 # John Markson
+    user_id: 2 # Lily Dawson
   )
   book3.picture.attach(
     io: File.open("app/assets/images/intro-arch-science.jpeg"),
