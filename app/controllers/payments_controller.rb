@@ -15,9 +15,10 @@ class PaymentsController < ApplicationController
     rental.save!
     
     book.quantity -= 1
-    if book.quantity == 0
+    if book.quantity <= 0
       book.available = false
     end
+    book.save!
 
     status 200
   end
