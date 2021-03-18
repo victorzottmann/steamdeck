@@ -75,7 +75,7 @@ class BooksController < ApplicationController
  
   def destroy
     @book.destroy
-    redirect_to books_path
+    redirect_to root_path
   end
 
   def search 
