@@ -13,7 +13,7 @@ class PaymentsController < ApplicationController
 
     status 200
     book = Book.find(book_id.to_i)
-    # book.available = false
+    book.available = false
     book.save
   end
 end

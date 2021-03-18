@@ -17,7 +17,7 @@ if Category.count == 0
 end
 
 
-#====== SUBCATEGORIES ======#
+#====== SUBCATEGORIES ====== Not using them at this stage #
 # arts_subcategories = [
 #   "Audio",
 #   "Filmmaking",
@@ -68,10 +68,10 @@ if User.count == 0
   user1 = User.create(
     first_name: "Victor",
     last_name: "Zottmann",
-    email: "victor@email.com",
+    email: "admin@email.com",
     password: "000000",
   )
-  # add admin authorization to user1
+  # set admin access to user1
   user1.add_role "admin"
   user1.save!
   

@@ -3,7 +3,6 @@
 
 <% if @cart.line_items.count <= 0 %>
   <% @cart.destroy %>
-  <%#= button_to 'Delete Cart', @cart, method: :delete, data: { confirm: "Are you sure? " }, class: "button is-danger" %>
 <% else %>
   <%= button_to 'Empty Cart', @cart, method: :delete, data: { confirm: "Are you sure? " }, class: "button is-danger" %>
 <% end %>

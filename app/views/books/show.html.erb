@@ -35,15 +35,12 @@
         <br><br>
         <h5>Quantity available: <%= @book.quantity %></h5>
         <hr>
-        <%= button_to "Add to Cart", line_items_path(book_id: @book), class: "basket-text btn btn-primary" %>
-      <% else %>
-        <%= button_to "Add to Cart", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
-      <% end %>
-      <!-- <% if user_signed_in? %>
         <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= @book.price %></button>
+        <%#= button_to "Add to Cart", line_items_path(book_id: @book), class: "basket-text btn btn-primary" %>
       <% else %>
-        <%= button_to "Rent for #{@book.price}", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
-      <% end %> --> 
+        <%= button_to "Rent for $#{@book.price}", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
+        <%#= button_to "Add to Cart", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
+      <% end %>
     </div>
     <br><br><br><br>
     <div class="map-container">

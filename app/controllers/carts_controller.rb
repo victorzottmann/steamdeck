@@ -9,32 +9,6 @@ class CartsController < ApplicationController
 
   
   def show
-    @books = current_user.carts.last.books
-    line_items = @books.map do |book|
-      {
-        name: book.title,
-        amount: (book.price * 100),
-        currency: 'aud',
-        quantity: 1
-      }
-    end
-
-    if user_signed_in?
-      session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        customer_email: current_user.email,
-        line_items: line_items,
-        # payment_intent_data: {
-        #   metadata: {
-        #     user_id: current_user.id,
-        #     book_id: @book.id
-        #   }
-        # },
-        success_url: "#{root_url}payments/success",
-        cancel_url: "#{root_url}books"
-      )
-      @session_id = session.id
-    end
   end
 
 
