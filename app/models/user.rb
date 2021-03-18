@@ -2,7 +2,7 @@ class User < ApplicationRecord
   rolify
 
   has_many :books, dependent: :destroy
-  has_many :carts
+  has_many :rentals
   has_one_attached :profile_picture
 
   # Include default devise modules. Others available are:
