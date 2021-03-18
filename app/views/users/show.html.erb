@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h2 class="hero-title text-center m-5">My Profile</h2>
+  <h2 class="hero-title text-center m-5"><%= @user.first_name %> <%= @user.last_name %>'s Profile</h2>
 </div>
 
 
@@ -14,13 +14,9 @@
     </div>
     <div class="card-body">
       <h5 class="card-title"><%= @user.first_name %> <%= @user.last_name %></h5>
-      <% if has_role?(:admin) %>
+      <% if @user.has_role?(:admin) %>
         <p style="text-align: center;">Admin</p>
       <% end %>
-      <div class="options-container">
-        <%= link_to "Edit Profile", edit_user_path, class: "btn" %>
-        <%= link_to "Account Settings", edit_user_registration_path, class: "btn" %>
-      </div>
       <hr>
       <h5>Bio</h5>
       <p class="card-text"><%= @user.bio %></p>
@@ -30,7 +26,7 @@
 </div>
 <br><br>
 
-<h2 class="my-books text-center"> My Books</h2>
+<h2 class="my-books text-center"><%= @user.first_name %> <%= @user.last_name %>'s Books</h2>
 <br><br>
 
 <div class="user-books-container">
@@ -45,7 +41,7 @@
             <h5 class="card-title"><%= book.title %></h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
             <p class="card-text">
-              <span><%= link_to "View", book_path(book.id) %> | <%= link_to "Edit", edit_book_path(book.id) %></span>
+              <p><%= link_to "View", book_path(book.id) %></p>
             </p>
           </div>
         </div>
@@ -55,7 +51,7 @@
 </div>
 <br><br>
 
-<h2 class="my-books text-center">Current Rentals</h2>
+<h2 class="my-books text-center"><%= @user.first_name %> <%= @user.last_name %>'s Rentals</h2>
 <br><br>
 
 <div class="user-books-container">

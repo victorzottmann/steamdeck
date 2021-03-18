@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   before_action :set_profile, only: %i[profile edit update ]
   before_action :authenticate_user!
 
+  def index
+    @users = User.all
+  end
+
   def profile
     @user = current_user
     @books = Book.all
@@ -9,6 +13,10 @@ class UsersController < ApplicationController
 
   
   def edit  
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
     
 

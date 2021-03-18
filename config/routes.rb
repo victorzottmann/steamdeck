@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get "/profile", to: "users#profile", as: "user_profile"
   get "/profile/edit", to: "users#edit", as: "edit_user"
   patch "/profile/edit", to: "users#update", as: "update_user"
+
+  get "/users/:id", to: "users#show", as: "user"
   
   get "categories/1", to: "categories#show", as: "creative_arts"
   get "categories/2", to: "categories#show", as: "design"
