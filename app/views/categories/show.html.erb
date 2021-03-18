@@ -1,14 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <h3 class="hero-title text-center m-5"><%= @category.name %> Books </h3>
+</div>
 
-<h4 class="page-heading"><%= @category.name %> books</h4>
-
-<div class="card-wrapper">
+<div class="cards-container">
   <% @books_by_category.each do |book| %>
-    <div class="card">
-      <%= image_tag book.picture, class: "card-img-top" if book.picture.attached? %>
+    <div class="card" style="width: 15rem;">
+      <%= link_to image_tag(book.picture, class: "card-img-top"), book_path(book.id) if book.picture.attached? %>
       <div class="card-body">
-        <h6 class="card-title"><%= book.title %></h6>
-        <p class="card-text"><%= book.author.first_name %> <%= book.author.last_name %></p>
+        <h6><%= link_to "#{book.title}", book_path(book.id), class: "card-title" %></h6>
+        <p style="text-align: center;"><%= link_to "#{book.author.first_name} #{book.author.last_name}", author_path(book.author.id), class: "card-text" %></p>
+        <hr>
+        <div class="rent-button">
+          <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= book.price %></button>
+        </div>
       </div>
     </div>
   <% end %>
