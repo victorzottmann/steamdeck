@@ -5,7 +5,6 @@ class PaymentsController < ApplicationController
   end
 
   def webhook
-    puts "***********"
     payment_id = params[:data][:object][:payment_intent]
     payment = Stripe::PaymentIntent.retrieve(payment_id)
     
@@ -14,10 +13,12 @@ class PaymentsController < ApplicationController
 
     rental = Rental.create(user_id: buyer.id, book_id: book.id)
     rental.save!
+    
+    book.quantity -= 1
+    if book.quantity == 0
+      book.available = false
+    end
 
     status 200
-
-    puts "*******Rental:"
-    p rental
   end
 end

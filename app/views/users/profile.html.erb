@@ -68,9 +68,7 @@
           <div class="card-body">
             <h5 class="card-title"><%= rental.book.title %></h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text">
-              <span><%= link_to "View", book_path(rental.book.id) %> | <%= link_to "Edit", edit_book_path(rental.book.id) %></span>
-            </p>
+            <p class="card-text"><%= link_to "View", book_path(rental.book.id) %></p>
           </div>
         </div>
       </div>

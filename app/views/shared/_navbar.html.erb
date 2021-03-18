@@ -49,12 +49,6 @@
                 <%= link_to 'Log out', destroy_user_session_path, method: "delete", class: "dropdown-item" %>
               <% end %>
             </ul>
-
-            <% if cart_has_items %>
-              <li class="nav-item">
-                <%= link_to "My Cart (#{cart_count})", cart_path(@cart.id), class: "nav-link active" %>
-              </li>
-            <% end %>
           </li>
         <% end %>
 
