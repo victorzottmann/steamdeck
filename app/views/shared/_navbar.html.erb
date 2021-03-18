@@ -42,7 +42,7 @@
 
           <% if current_user.rentals.count > 0 %>
             <li class="nav-item">
-              <%= link_to 'My Rentals', new_book_path, class: "nav-link active" %>
+              <%= link_to 'My Rentals', rentals_path, class: "nav-link active" %>
             </li>
           <% end %>
 

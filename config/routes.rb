@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :authors
   resources :books
   resources :categories
+  resources :rentals
   resources :publishers
 
   devise_for :users

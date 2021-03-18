@@ -32,17 +32,18 @@
       <%= form.text_field :title, class: "form-control", autocomplete: "off" %>
     </div>
     <br>
-    <div class="field">
-      <%= form.fields_for :author do |f| %>
-        <%= f.label :author %>
-        <br>
-        <%= f.label :first_name %>
-        <%= f.text_field :first_name, class: "form-control", autocomplete: "off" %>
-        <br>
-        <%= f.label :last_name %>
-        <%= f.text_field :last_name, class: "form-control", autocomplete: "off" %>
-      <% end %>
-    </div>
+    <%= form.fields_for :author do |f| %>
+      <div class="first-last-names">
+        <div>
+          <%= f.label "Author's First Name" %>
+          <%= f.text_field :first_name, class: "form-control first-name", autofocus: true, autocomplete: "email" %>
+        </div>
+        <div>
+          <%= f.label "Author's Last Name" %>
+          <%= f.text_field :last_name, class: "form-control last-name", autofocus: true, autocomplete: "email" %>
+        </div>
+      </div>
+    <% end %>
     <br>
     <div class="field">
       <%= form.fields_for :publisher do |f| %>

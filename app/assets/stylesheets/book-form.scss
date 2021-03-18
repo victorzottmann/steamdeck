@@ -9,6 +9,20 @@
   display: flex;
   justify-content: center;
 
+  .first-last-names {
+    display: flex;
+    justify-content: space-between;
+
+    .first-name {
+      width: 24vh;
+    }
+
+    .last-name {
+      width: 24vh;
+    }
+   
+  }
+
   .field {
     width: 50vh;
   }
