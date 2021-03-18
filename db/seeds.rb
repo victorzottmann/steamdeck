@@ -107,8 +107,8 @@ if Author.count == 0
 
   # author3, book3
   author3 = Author.create(
-    first_name: "Chris",
-    last_name: "Pine"
+    first_name: "Steven",
+    last_name: "V. Szokolay"
   ) 
 
   # author4, book4
@@ -123,7 +123,7 @@ end
 if Publisher.count == 0
   publisher1 = Publisher.create(name: "CRC Press") # book1
   publisher2 = Publisher.create(name: "Basic Books") # book2
-  publisher3 = Publisher.create(name: "Pragmatic Bookshelf") # book3
+  publisher3 = Publisher.create(name: "Routledge") # book3
   publisher4 = Publisher.create(name: "Silman-James Press") # book4
 end
 
@@ -169,21 +169,21 @@ if Book.count == 0
   )
 
   book3 = Book.create(
-    title: "Learn to Program",
-    edition: 2,
-    pages: 194,
-    date: "28-03-2009",
-    format: "E-book",
+    title: "Introduction to Architectural Science",
+    edition: 3,
+    pages: 392,
+    date: "10-03-2014",
+    format: "Paperback",
     price: 5.00,
     available: true,
-    author_id: 3, # Chris Pine
-    category_id: 3, # Information Technology
-    publisher_id: 3, # Pragmatic Bookshelf
+    author_id: 3, # Steven V. Szokolay
+    category_id: 3, # Science
+    publisher_id: 3, # Routledge
     user_id: 3 # John Markson
   )
   book3.picture.attach(
-    io: File.open("app/assets/images/learn-to-program.jpg"),
-    filename: "learn-to-program.jpg",
+    io: File.open("app/assets/images/intro-arch-science.jpg"),
+    filename: "intro-arch-science.jpg",
     content_type: "image/jpg"
   )
 
