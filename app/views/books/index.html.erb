@@ -1,12 +1,15 @@
 
-<h1 class="home-heading">Books</h1>
+<div class="container-fluid">
+  <h2 class="hero-title text-center m-5">Books</h2>
+</div>
 
-<table>
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
       <th>Title</th>
       <th>Edition</th>
       <th>Format</th>
+      <th>Price</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,6 +20,7 @@
         <td><%= book.title %></td>
         <td><%= book.edition %></td>
         <td><%= book.format %></td>
+        <td>$<%= book.price %></td>
 
         <td><%= link_to 'Show', book %></td>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
@@ -29,3 +33,4 @@
 <br>
 
 <%= link_to 'New Book', new_book_path %>
+<br><br><br>

@@ -36,8 +36,6 @@
   .basket {
     @include flex-between-column();
     width: 350px;
-    // padding: 15px;
-    // border: 1px solid black;
     
     .basket-links {
       width: 100%;
@@ -55,6 +53,10 @@
         background-color: #f1981a;
       }
 
+      .btn:focus {
+        box-shadow: none;
+      }
+
       h4 {
         margin-bottom: 0;
       }
@@ -67,6 +69,10 @@
 
       .map-heading {
         text-align: left;
+      }
+
+      .location-subs {
+        font-size: 0.8em;
       }
       
       #map { 

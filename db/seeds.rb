@@ -17,7 +17,7 @@ if Category.count == 0
 end
 
 
-#====== SUBCATEGORIES ======#
+#====== SUBCATEGORIES ====== Not using them at this stage #
 # arts_subcategories = [
 #   "Audio",
 #   "Filmmaking",
@@ -68,10 +68,10 @@ if User.count == 0
   user1 = User.create(
     first_name: "Victor",
     last_name: "Zottmann",
-    email: "victor@email.com",
+    email: "admin@email.com",
     password: "000000",
   )
-  # add admin authorization to user1
+  # set admin access to user1
   user1.add_role "admin"
   user1.save!
   
@@ -107,8 +107,8 @@ if Author.count == 0
 
   # author3, book3
   author3 = Author.create(
-    first_name: "Chris",
-    last_name: "Pine"
+    first_name: "Steven",
+    last_name: "V. Szokolay"
   ) 
 
   # author4, book4
@@ -123,7 +123,7 @@ end
 if Publisher.count == 0
   publisher1 = Publisher.create(name: "CRC Press") # book1
   publisher2 = Publisher.create(name: "Basic Books") # book2
-  publisher3 = Publisher.create(name: "Pragmatic Bookshelf") # book3
+  publisher3 = Publisher.create(name: "Routledge") # book3
   publisher4 = Publisher.create(name: "Silman-James Press") # book4
 end
 
@@ -137,6 +137,8 @@ if Book.count == 0
     date: "05-02-2014",
     format: "Paperback",
     price: 5.00,
+    quantity: 2,
+    available: true,
     author_id: 1, # Marc Asselineau
     publisher_id: 1, # CRC Press
     category_id: 4, # Science
@@ -155,6 +157,8 @@ if Book.count == 0
     date: "05-11-2013",
     format: "Paperback",
     price: 5.00,
+    quantity: 1,
+    available: true,
     author_id: 2, # Don Norman
     category_id: 2, # Design
     publisher_id: 2, # Basic Books
@@ -167,21 +171,23 @@ if Book.count == 0
   )
 
   book3 = Book.create(
-    title: "Learn to Program",
-    edition: 2,
-    pages: 194,
-    date: "28-03-2009",
-    format: "E-book",
+    title: "Introduction to Architectural Science",
+    edition: 3,
+    pages: 392,
+    date: "10-03-2014",
+    format: "Paperback",
     price: 5.00,
-    author_id: 3, # Chris Pine
-    category_id: 3, # Information Technology
-    publisher_id: 3, # Pragmatic Bookshelf
+    quantity: 1,
+    available: true,
+    author_id: 3, # Steven V. Szokolay
+    category_id: 4, # Science
+    publisher_id: 3, # Routledge
     user_id: 3 # John Markson
   )
   book3.picture.attach(
-    io: File.open("app/assets/images/learn-to-program.jpg"),
-    filename: "learn-to-program.jpg",
-    content_type: "image/jpg"
+    io: File.open("app/assets/images/intro-arch-science.jpeg"),
+    filename: "intro-arch-science.jpeg",
+    content_type: "image/jpeg"
   )
 
   book4 = Book.create(
@@ -191,6 +197,8 @@ if Book.count == 0
     date: "08-08-2001",
     format: "Paperback",
     price: 5.00,
+    quantity: 3,
+    available: true,
     author_id: 4, # Walter Murch
     category_id: 1, # Creative Arts
     publisher_id: 4, # Silman-James Press

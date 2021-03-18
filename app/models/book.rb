@@ -18,7 +18,7 @@ class Book < ApplicationRecord
 
     def not_referenced_by_any_line_item
       unless line_items.empty?
-        errors.add(:base, "Line items present")
+        errors.add(:base, "You have this book added to your cart.")
         throw :abort
       end
     end

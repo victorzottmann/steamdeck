@@ -2,6 +2,7 @@
 <div class="show-content">
   <div>
     <%= image_tag @book.picture, class: "show-img-top" if @book.picture.attached? %>
+    <br><br>
   </div>
 
   <div class="book-info">
@@ -9,11 +10,12 @@
     <p>By <%= link_to "#{@book.author.first_name} #{@book.author.last_name}", author_path(@book.author.id) %></p>
     <p>Format: <%= @book.format %></p>
     
-    <% if @book.user || has_role?(:admin) %>
+    <% if (user_signed_in? && @book.user) || has_role?(:admin) %>
       <span><%= link_to "Edit", edit_book_path %> |</span>
       <span><%= link_to "Delete", @book, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+      <br />
     <% end %>
-    <br><br>
+    <br>
 
     <div class="book-description col-md-7 order-md-2">
       <h5>Summary</h5>
@@ -27,39 +29,37 @@
   
   <div class="basket">  
     <div class="basket-links">
-     <% if user_signed_in? %>
-      <%= button_to "Add to Cart", line_items_path(book_id: @book), class: "basket-text btn btn-primary" %>
-    <% else %>
-      <%= button_to "Add to Cart", new_user_registration_path, class: "basket-text btn btn-primary" %>
-    <% end %>
-      <!-- <% if user_signed_in? %>
-        <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= @book.price %></button>
+      <% if user_signed_in? %>
+        <h4>Sold by</h4><br>
+        <%= link_to "#{@user.first_name} #{@user.last_name}", user_profile_path %>
+        <br><br>
+        <% if @book.available %>
+          <h5 class="book-available"><%= @book.quantity %> Units Available ✅</h5><hr />
+          <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= @book.price %> (AUD)</button>
+        <% else %>
+          <h5 class="book-unavailable">Unvailable ❌</h5><hr />
+        <% end %>
       <% else %>
-        <%= button_to "Rent for #{@book.price}", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
-      <% end %> --> 
+        <%= button_to "Rent for $#{@book.price} (AUD)", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
+      <% end %>
     </div>
-    <br><br><br>
+
+    <br><br><br><br>
+
     <div class="map-container">
-      <h5 class="map-heading">Locations Available for Pickup:</h5>
+      <h5 class="map-heading">
+        Locations Available for Pickup:
+        <br><br>
+        <p class="location-subs">(click on the pins to view store hours)</p>
+      </h5>
       <div id="map">
         <%= javascript_pack_tag "leaflet/index" %>
       </div>
     </div>
   </div>
-
 </div>
 
+<br><br><br>
 
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-  document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
-      var stripe = Stripe(
-        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
-      );
-
-      stripe.redirectToCheckout({
-        sessionId: "<%= @session_id %>"
-      });
-    });
-</script>
+<%= render "shared/stripe-btn" %>
 

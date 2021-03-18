@@ -54,56 +54,24 @@ $link-color: #1B73F9;
       }
     }
 
-    .action-icons {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      // border: 1px solid black;
+    .rent-button {
 
-      .swap-action {
-        display: flex;
-        justify-content: space-between; 
-        
-        p {
-          margin-bottom: 0;
-        }
-
-        .swap-icon {
-          width: 1.7em;
-          fill: black;
-        }
+      .btn {
+        background-color: #ff9f1c;
+        color: black;
+        border-color: black;
+        width: 100%;
+        font-size: 1em;
+        height: 40px;
+      }
+  
+      .btn:hover {
+        background-color: #f1981a;
       }
 
-      .basket-action {
-        display: flex;
-        justify-content: space-between;
-        
-        p {
-          margin-bottom: 0;
-        }
-        
-        .basket-icon {
-          margin-top: 0;
-          width: 1.6em;
-          fill: orange;
-        }
-      }
-
-    }
-
-
-    .btn {
-      margin-bottom: 10px;
-      width: 60%;
-      height: 40px;
-      background-color: #ffddd2;
-      color: black;
-      border-color: black;
-      font-size: 1.1rem;
-    }
-
-    .btn:hover {
-      background-color: #f5cbbd;
+      // .btn:focus {
+      //   box-shadow: none;
+      // }
     }
   }
 }

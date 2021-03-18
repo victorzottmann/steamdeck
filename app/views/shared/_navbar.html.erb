@@ -21,26 +21,28 @@
             <li><%= link_to 'Science', science_path, class: "dropdown-item" %></li>
           </ul>
         </li>
-
-        <li class="nav-item">
-          <%= link_to 'All Books', books_path, class: "nav-link active" %>
-        </li>
       </ul> 
 
       <ul class="navbar-nav mr-auto">
-        <% if user_signed_in? && has_role?(:admin) %>
+        <% if user_signed_in? %>
+          <% if has_role?(:admin) %>
+            <li class="nav-item">
+              <%= link_to 'Manage Books', books_path, class: "nav-link active" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Manage Categories', categories_path, class: "nav-link active" %>
+            </li>
+          <% end %>
+
           <li class="nav-item">
-            <%= link_to 'Edit Categories', categories_path, class: "nav-link active" %>
+            <%= link_to 'Add Book', new_book_path, class: "nav-link active" %>
           </li>
-        <% elsif user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to 'Create Book', new_book_path, class: "nav-link active" %>
-          </li>
-          
+
           <li class="nav-item dropdown">
             <a class="nav-link mx-auto dropdown-toggle" id="dropdown-link" href="#" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown07">
               <%= link_to 'My Profile', user_profile_path, class: "dropdown-item" %>
+
               <% if !user_signed_in? %>
                 <%= link_to 'Log in', new_user_session_path, class: "dropdown-item" %>
               <% else %>
@@ -55,7 +57,6 @@
             <% end %>
           </li>
         <% end %>
-
 
         <% if !user_signed_in? %>
           <li class="nav-item">

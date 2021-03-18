@@ -1,9 +1,8 @@
 
-<%= render "line_items/line_item" %>
+<%= render "shared/line_item" %>
 
 <% if @cart.line_items.count <= 0 %>
   <% @cart.destroy %>
-  <%#= button_to 'Delete Cart', @cart, method: :delete, data: { confirm: "Are you sure? " }, class: "button is-danger" %>
 <% else %>
   <%= button_to 'Empty Cart', @cart, method: :delete, data: { confirm: "Are you sure? " }, class: "button is-danger" %>
 <% end %>
@@ -13,9 +12,9 @@
 <br><br>
 
 <% if user_signed_in? %>
-    <% if @cart.line_items.count > 0 %>
-      <button data-stripe="payment" class="basket-text btn btn-primary">Checkout</button>
-    <% end %>
+  <% if @cart.line_items.count > 0 %>
+    <button data-stripe="payment" class="basket-text btn btn-primary">Checkout</button>
+  <% end %>
 <% else %>
     <%= button_to "Checkout", new_user_registration_path, method: :get, class: "basket-text btn btn-primary" %>
 <% end %>
