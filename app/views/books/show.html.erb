@@ -33,7 +33,7 @@
         <h4>Kindly Shared By</h4><br>
         <%= link_to "#{@book.user.first_name} #{@book.user.last_name}", user_path(@book.user) %>
         <br><br>
-        <% if @book.available %>
+        <% if @book.available > 0 %>
           <h5 class="book-available"><%= @book.quantity %> in Stock ✅</h5><hr />
           <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= @book.price %> (AUD)</button>
         <% else %>
