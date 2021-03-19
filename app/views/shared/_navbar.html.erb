@@ -1,4 +1,18 @@
 
+<!-- Website title and search bar -->
+<div class="container">
+  <div class="brand-search">
+    <h1><%= link_to 'STEAMdeck', root_path, class: "navbar-brand" %></h1>
+
+    <%= form_tag book_search_path, method: :get, class: "navbar-form" do %>
+      <div class="search-bar">
+        <%= text_field_tag :q, params[:q], placeholder: "Search by keyword or title", class: "fa fa-search form-control", autocomplete: "off", style: "outline: none;" %>
+        <%= submit_tag "Search", class: "btn btn-default" %>
+      </div>
+    <% end %>    
+  </div>
+</div>
+
 <nav class="navbar navbar-expand-lg navbar-fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +80,7 @@
           </li>
           <li class="nav-item">
             <!-- Improvised way to make a divider between navbar links -->
-            <%= link_to '|', "#", class: "nav-link active" %>
+            <%= link_to '|', "#", class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to 'Sign up', new_user_registration_path, class: "nav-link active" %>

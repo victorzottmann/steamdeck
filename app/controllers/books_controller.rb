@@ -10,8 +10,8 @@ class BooksController < ApplicationController
 
  
   def show
-    @book = Book.find(params[:id])
     @user = current_user
+    set_book
 
     if user_signed_in?
       session = Stripe::Checkout::Session.create(
@@ -55,6 +55,7 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     @book.user = current_user
     load_categories
+
     if @book.save
       flash[:success] = "A new book was successfully created."
       redirect_to book_path(@book.id)

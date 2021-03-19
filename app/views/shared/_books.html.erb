@@ -7,25 +7,14 @@
         <h6><%= link_to "#{book.title}", book_path(book.id), class: "card-title" %></h6>
         <p style="text-align: center;"><%= link_to "#{book.author.first_name} #{book.author.last_name}", author_path(book.author.id), class: "card-text" %></p>
         <hr>
-        <div class="rent-button">
-          <button data-stripe='payment' class="btn">Rent for $<%= book.price %> (AUD)</button>
+        <div class="cart-container">
+          <div class="cart-content">
+            <p class="cart-text">Kindly shared by</p> 
+            <%= link_to "#{book.user.first_name} #{book.user.last_name}", user_path(book.user), class: "cart-text" %>
+          </div>
         </div>
       </div>
     </div>
   <% end %>
 </div>
-
-
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-  document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
-      var stripe = Stripe(
-        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
-      );
-
-      stripe.redirectToCheckout({
-        sessionId: "<%= @session_id %>"
-      });
-    });
-</script>
 

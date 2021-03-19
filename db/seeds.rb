@@ -63,25 +63,25 @@ end
 
 #====== AUTHORS ======#
 if Author.count == 0
-  # author1 => book1
+  # author1 => book1 => publisher1
   author1 = Author.create(
     first_name: "Marc", 
     last_name: "Asselineau"
   ) 
     
-  # author2 => book2
+  # author2 => book2 => publisher1
   author2 = Author.create( 
     first_name: "Don",
     last_name: "Norman"
   ) 
 
-  # author3 => book3
+  # author3 => book3 => publisher1
   author3 = Author.create(
     first_name: "Steven",
     last_name: "V. Szokolay"
   ) 
 
-  # author4 => book4
+  # author4 => book4 => publisher4
   author4 = Author.create(
     first_name: "Walter",
     last_name: "Murch"
