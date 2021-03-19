@@ -177,17 +177,263 @@ STEAMdeck also envisions a different method of exchanging books, as opposed to s
 
 
 
-## High-Level Components
+## High-Level Components of the App
 
-**DISCUSS THE FOLLOWING POINTS:**
+---
+
+#### 1. Active Record
+
+Representing the Model of the MVC acronym, Active Record is the system responsible for handling the business data and logic (**Rails Guides, n.d.**) and it facilitates the creation of objects whose data demands constant storage to the database (**Rails Guides, n.d.**). The system works by implementing the Object Relational Mapping (ORM) technique, which essentially allows developers to query data without writing SQL. Given that Rails follows a *convention over configuration* model, plenty of the configurations needed to set the system are managed under the hood, therefore allowing developers to create Active Record models more efficiently.
+
+The main differences between Active Record and SQL commands lie in the naming conventions. For example, in Active Record models (database tables) are referred to in the singular tense, as opposed to the plural tense standardized in SQL. In addition, model names should be created in CamelCase style, also in the singular tense.
+
+Active Record also provides CRUD methods for accessing the database. Common ones used throught the app are the following:
+
+```ruby
+# Book.all gets all books in the Book model (or books in SQL).
+@books = Book.all
+
+# Book.find(params[:id]) retrieves the book whose id matches the URL params. For example, if the URL is http://localhost:3000/books/1, the number 1 would be the book whose id is 1.
+@book = Book.find(params[:id])
+
+# Book.new simply creates a new book entry.
+@book = Book.new
+
+# Here @title is assigned to whichever value is passed into the params[:q] (in this case it would a search parameter, where :q is a symbol for 'query').
+@title = params[:q].downcase
+# Then, Book.where refers to the SQL command SELECT * FROM books WHERE title LIKE '%title%'. In this case, Book.where is looking for whichever characters are before, within, of after the keyword stored in @title (that's the role of the % signs)
+@books = Book.where("lower(title) LIKE ?", "%#{@title}%")
+
+# There are also many other self-explanatory methods utilized, such as:
+@book.save
+@book.create
+@book.update
+@book.destroy
+```
+
+In each model file, the class of the model is inherited from the ApplicationRecord class, which in turn is inherited from the ActiveRecord class. For example:
+
+```ruby
+
+class ApplicationRecord < ActiveRecord::Base
+  self.abstract_class = true
+end
+
+class Book < ApplicationRecord
+  belongs_to :author
+  belongs_to :category
+  belongs_to :publisher
+  belongs_to :user
+
+  has_one_attached :picture
+
+  # These two methods are discussed in 'X. Nested forms' section below.
+  accepts_nested_attributes_for :author
+  accepts_nested_attributes_for :publisher
+
+  # This method is discussed in the 'X. Roles' section below.
+  resourcify
+end
+
+class Author < ApplicationRecord
+  has_many :books
+end
+```
+
+In addition to the above-mentioned methods, Active Record also provides methods to define associations between models. For example, in the code snippet above, a book `belongs_to` an author, and an author `has_many` books. Despite the convention for referring to a model demanding it to be in the singular form, the model must be called in the plural when the method calling it is in the plural. Otherwise, `has_many`book would not make sense.  Furthermore, although the Book model does not contain a `picture`, the method `has_one_attached` allows one to associate a book with an uploaded image.
+
+#### 2. Active Controller
+
+Similar to Active Record, Active Controller follows Rails' *convention over configuration* style, and corresponds to the C in MVC. The Action Controller comprises several methods for handling HTTP requests sent by the browser. Such methods tell the controller what to do in relation to the requests themselves, such as display the home page or retrieve specific data from the database. As with the Active Record, the Action Controller inherits from a couple of parent classes, for example:
+
+```ruby
+class ApplicationController < ActionController::Base
+end
+
+class BooksController < ApplicationController
+  # All the methods for handling HTTP requests are defined here. They usually consist of the following.
+  
+  def index # for displaying the main page of books. In this case it would be /books
+  end
+  
+  def show # for showing only one item. In this case it would be /books/1, /books/2, etc.
+  end
+  
+  def edit # for editing a book
+  end
+  
+  def create # for creating a book
+  end
+  
+  def update # for updating a book
+  end
+  
+  def destroy # for deleting a book
+  end
+end
+```
+
+When creating a new controller, Rails automatically creates a folder for `books` under the `views` section of the app. Each Ruby file must follow the name of the methods defined in the controller. For example, the views for the controller above should be named as:
+
+- `index.html.erb` (erb stands for Embedded Ruby and it is necessary in order to write Ruby code in HTML files).
+- `show.html.erb`
+- `edit.html.erb`
+- `create.html.erb`
+- `update.html.erb`
+- `delete.html.erb`
+
+In order for the Action Controller to work properly, routes must be defined, otherwise it would be impossible for HTTP requests to be sent to the controller at hand. The routes consist of GET, POST, PUT/PATCH, and DESTROY requests. In the case of the app, they are formatted like this:
+
+```ruby
+Rails.application.routes.draw do
+  get "books/search", to: "books#search", as: "book_search"
+
+  # Resources simply create all routes for any given controller at once. T
+  # They can be accessed by running $ rails routes -g controller_name on the terminal
+  # or it is also possible to see all routes for all by running $ rails routes.
+  resources :authors
+  resources :books
+  resources :categories
+  resources :rentals
+  resources :publishers
+
+  # devise_for generates all routes for the users controllers. Devise is a gem for handling authentications and its integration in the project is discussed in section X.
+  devise_for :users
+  get "/users/:id", to: "users#show", as: "user"
+  
+  get "/profile", to: "users#profile", as: "user_profile"
+  get "/profile/edit", to: "users#edit", as: "edit_user"
+  patch "/profile/edit", to: "users#update", as: "update_user"
+
+  get "categories/1", to: "categories#show", as: "creative_arts"
+  get "categories/2", to: "categories#show", as: "design"
+  get "categories/3", to: "categories#show", as: "tech"
+  get "categories/4", to: "categories#show", as: "science"
+  
+  get "/payments/success", to: "payments#success"
+  post "/payments/webhook", to: "payments#webhook"
+
+  root to: "home#index"
+end
+```
+
+
+
+#### 3. Action View
+
+Corresponding to the V in MVC, the Action View is what allows Ruby code to be embedded within HTML code. It demands that HTML files be extended with `.erb` at the end, and the syntax for `erb` is written in the following ways.
+
+```erb
+<!-- The <%=  %> with an equal sign tells HTML to display what is inside it. -->
+<p><%= some_code %><p> 
+
+<!-- The <%  %> without the equal sign tells HTML not to display, but to only run the code instead. In addition, CSS classes can be included in erb code, however, they must be written with a colon instead of around quotes -->
+<% if condition %> 
+	<%= link_to 'Log in', new_user_session_path, class: "dropdown-item" %>
+<% else %>
+	<%= link_to 'Log out', destroy_user_session_path, method: "delete", class: "dropdown-item" %>
+<% end %>
+```
+
+
+
+The Action View also allows one to store a piece of code that is likely to be reused multiple times in a separate file, referred to as a `partial`. Once one needs to import the code, one need only call a `render` method to display it in the view at hand. For example:
+
+```ruby
+# Suppose this is to be reused in multiple places:
+<nav class="footer fixed-bottom">
+  <p class="copyright">Created by Victor Zottmann © 2021</p>
+</nav>
+```
+
+Instead of copying the footer to every single view, one can store it in a partial. Partials are named with an underscore preceding the first word: `_footer.html.erb`. By default, Rails provides one with a file called `application.html.erb`, which essentially renders a unique piece of code into all views. Therefore, since the footer should appear everywhere in the app, the following code should be inserted into the `application.html.erb` file. The same is applicable to the `nav bar`.
+
+```erb
+<body>
+	<%= render "shared/navbar" %>
+  
+	<div class="container">
+		<%= yield %> <!-- yield grabs all content from all erb files -->
+	</div>
+  
+	<%= render "shared/footer" %>
+</body>
+```
+
+
+
+#### 4. Active Storage
+
+A fourth high-level component used in the app is the Active Storage, whose role lies in facilitating the storage of files in cloud services, such as Amazon Web Services (AWS) S3, Cloudinary, or Microsoft Azure. It is also possible to set Active Storage to run locally. In the case of this project, I chose to use AWS for its simplicity, security and reliability. 
+
+Unlike the previous components, however, Active Storage must be installed; it takes only two commands to do so: 
+
+- `$ bin/rails active_storage:install` , which will create two tables (shown below), and
+- `$ bin/rails db:migrate` to migrate the tables to the database. 
+
+```ruby
+create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+```
+
+Rails stores the default service that Active Storage should use in `config/storage.yml`. In order to declare AWS S3 as the service, one must uncomment the pre-defined amazon declarations and fill in the required fields.
+
+```yaml
+amazon:
+  service: S3
+  access_key_id: "your_key"
+  secret_access_key: "your_key"
+  bucket: "your_bucket_name"
+  region: "" # e.g. 'us-east-1'
+```
+
+Given that both keys must not be accessable by others, Rails provides a very secure way to store them:
+
+```yaml
+amazon:
+  service: S3
+  # This line loads the encrypted credentials file which contains API keys for third-party services.
+  access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+bucket: "your_bucket_name"
+  region: "" # e.g. 'us-east-1'
+```
+
+
+
+
+
+
+
+
 
 - LeafleftJS + Mapbox
+
 - Devise + CanCanCan + Rolify
-- Rentals join table
+
 - Stripe + Ultrahook updating inventory
-- Search bar 
-- Nested forms to write both to the authors, books and publishers tables
-- AWS S3
+
+  
+
+  
 
 
 
@@ -195,16 +441,158 @@ STEAMdeck also envisions a different method of exchanging books, as opposed to s
 
 ---
 
-- ### Associations
+#### 1. Associations
+
+The following list items display the existing models in the application, followed by in-depth descriptions of their relations with each other.
+
+- Author
+
+  An author is associated with books whereby an author has many books, and a book belongs to one author. Indeed, a book can have many author, though I decided to restrict it only to one author for simplicity reasons.
 
   
 
+- Book
+
+  A book is associated with an author by the relationship described above, and it is also related to a category, a publisher, and a user. The Book model contains a foreign key that refers to the primary key of the author, the `author_id`, as well as foreign keys that connect to the `category_id`, the `publisher_id`, and the `user_id`. 
+
+  In terms of the Active Record associations between the last-mentioned models, a book `belongs_to` each one of them, and each `has_many` books. As mentioned in the Active Record section above, although the book model does not contain a picture, the Active Record provides a method to attach a picture to a model, which is called `has_one_attached`. Additional methods are declared in the book model:
+
+  ```ruby
+  accepts_nested_attributes_for :author
+  accepts_nested_attributes_for :publisher
+  ```
+
+  The role of `accepts_nested_attributes_for` is to include fields from other models into the form for creating a new book. Because the Book model itself is referencing both the Author and the Publisher models, if one were to create a form with fields to input the author's and the publisher's names by themselves, the data would not be saved into either databases. Essentially, the idea is that whenever the user inputs the required data for the author and the publisher within the form to create a new book, the data should be saved into the Author and the Publisher models separately, and associate the respective`foreign keys` from the Book model with both the `author_id`and the `publisher_id`. Aside from declaring the methods above, the following code must be implemented in the `BooksController`
+
+
+  ```ruby
+  class BooksController < ApplicationController
+    def new
+      @book = Book.new
+      @book.build_author # This line builds a new author when the book form is loaded
+      @book.build_publisher # This line builds a new publisher when the book form is loaded
+  
+      load_categories
+    end
+  
+    def create
+      @book = Book.new(book_params)
+      # This line assigns the current user to the book that is being created. current_user is a method from the Devise authentication gem.
+      @book.user = current_user 
+      # This line load all the categories as defined in the private section below
+      load_categories 
+  
+      if @book.save
+        flash[:success] = "A new book was successfully created."
+        redirect_to book_path(@book.id)
+      else
+        flash.now[:error] = @book.errors.full_messages.to_sentence
+        render "new"
+      end    
+    end
+  
+    private
+    def load_categories
+      @categories = Category.all # This line loads all the categories so that they can be selected within the book form.
+    end
+  
+    def book_params
+      # The key part here is including the author_attributes and the publisher_attributes in the permitted parameters. This method must be private.
+      params.require(:book).permit(:picture, :title, :edition, :pages, :date, :format, :price, :quantity, 	   	 :author_id, :publisher_id, :category_id, author_attributes: [:first_name, :last_name], publisher_attributes: [:name])
+    end
+  end
+  ```
+
+
+  Finally, as it can be seen below, the form for creating a new book contains the required parameters for writing the input into the database.
+
+  ![new-book-author-publisher](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/new-book-author-publisher.png)
+
+
+
+- Category
+
+  The category model is only associated with books and follow the relationship described above.
   
 
-  
+- Publisher
+
+  The publisher model follows the same pattern as the category model.
   
 
-- ### Schema
+- Rental
+
+  The Rental model is a join table associated with both a book and a user. This was necessary in order to allow the user to see the list of book they are currently renting after any given transaction is made. The rental model has an Active Record association that `belongs_to` both the Book and the User models.
+  
+
+- Role
+
+  The Role model is generated by the Rolify gem, which serves to manage user roles within the app. The gem integrates well with both Devise and CanCanCan, which is an access authorisation gem. Once created, the model will contain an association that `has_and_belongs_to_many` users, and it explicitly points itself toward the `users_roles` join table. Rolify requires that the Book and the User models include the `resourcify` method. The code snippet below illustrates the declaration made in the Role model.
+
+  ```ruby
+  class Role < ApplicationRecord
+    has_and_belongs_to_many :users, :join_table => :users_roles
+    
+    belongs_to :resource,
+               :polymorphic => true,
+               :optional => true
+    
+  
+    validates :resource_type,
+              :inclusion => { :in => Rolify.resource_types },
+              :allow_nil => true
+  
+    scopify
+  end
+  ```
+
+  In addition to the Role model, the CanCanCan gem creates an Ability model whose `initialize` method combines its features with Rolify to check whether the user has access to admin rights (see the code snippet below). The model itself does display any explicit associations.
+
+  ```ruby
+  class Ability
+    include CanCan::Ability
+  
+    def initialize(user)      
+      user ||= User.new # guest user (not logged in)
+      if user.has_role? :admin
+        can :manage, :all
+      else
+        can :read, :all
+      end
+    end
+  end
+  ```
+
+  
+
+- Users
+
+  The User model consists of an Active Record association that `has_many`books, as well as `has_many` rentals. It also contains a `has_one_attached` method for the user to attach a picture to their profile. Moreover, the model contains declarations for Devise modules, which is the gem that handles user authentications. The code snippet below demonstrates the structure of the User model.
+
+  ```ruby
+  class User < ApplicationRecord
+    rolify
+  
+    has_many :books, dependent: :destroy
+    has_many :rentals
+    has_one_attached :profile_picture
+  
+    # Include default devise modules. Others available are:
+    # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+    devise :database_authenticatable, :registerable,
+           :recoverable, :rememberable, :validatable
+  end
+  ```
+
+  
+
+- User Roles
+
+  Finally, the User Roles join table simply contains foreign keys to both the `role_id` and the `user_id`.
+
+
+
+#### 2. Schema - UPDATE WITH NEWER DATA
 
 ```ruby
 #==== Schema for Rails Active Storage ====#
@@ -260,32 +648,25 @@ create_table "books", force: :cascade do |t|
   t.index ["user_id"], name: "index_books_on_user_id"
 end
 
-create_table "carts", force: :cascade do |t|
-  t.datetime "created_at", precision: 6, null: false
-  t.datetime "updated_at", precision: 6, null: false
-  t.boolean "completed"
-end
-
 create_table "categories", force: :cascade do |t|
   t.string "name"
   t.datetime "created_at", precision: 6, null: false
   t.datetime "updated_at", precision: 6, null: false
 end
 
-create_table "line_items", force: :cascade do |t|
-  t.bigint "book_id", null: false
-  t.bigint "cart_id", null: false
-  t.datetime "created_at", precision: 6, null: false
-  t.datetime "updated_at", precision: 6, null: false
-  t.integer "quantity", default: 1
-  t.index ["book_id"], name: "index_line_items_on_book_id"
-  t.index ["cart_id"], name: "index_line_items_on_cart_id"
-end
-
 create_table "publishers", force: :cascade do |t|
   t.string "name"
   t.datetime "created_at", precision: 6, null: false
   t.datetime "updated_at", precision: 6, null: false
+end
+
+create_table "rentals", force: :cascade do |t|
+  t.bigint "user_id", null: false
+  t.bigint "book_id", null: false
+  t.datetime "created_at", precision: 6, null: false
+  t.datetime "updated_at", precision: 6, null: false
+  t.index ["book_id"], name: "index_rentals_on_book_id"
+  t.index ["user_id"], name: "index_rentals_on_user_id"
 end
 
 # This table is created by the Rolify gem for managing user roles
@@ -329,8 +710,9 @@ add_foreign_key "books", "authors"
 add_foreign_key "books", "categories"
 add_foreign_key "books", "publishers"
 add_foreign_key "books", "users"
-add_foreign_key "line_items", "books"
-add_foreign_key "line_items", "carts"
+add_foreign_key "rentals", "books"
+add_foreign_key "rentals", "users"
+
 ```
 
 
@@ -376,6 +758,8 @@ add_foreign_key "line_items", "carts"
 - **Heroku**: Deployment platform (Rails industry standard)
 
 - **Git / GitHub**: Platform for version control.
+
+- **Trello**: Platform for task and project management
 
   
 
