@@ -939,3 +939,9 @@ To be fair, I did not use Trello too much to track my progress. I admit that, fo
 - **Heroku**: Deployment platform (Rails industry standard).
 - **Git / GitHub**: Platform for version control.
 - **Trello**: Platform for task and project management.
+
+---
+
+## References
+
+Rails Guides. (n.d.). Active Record Basics. Retrieved from https://guides.rubyonrails.org/active_record_basics.html
