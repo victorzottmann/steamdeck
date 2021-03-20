@@ -61,14 +61,14 @@
           <% end %>
 
           <li class="nav-item dropdown">
-            <a class="nav-link mx-auto dropdown-toggle" id="dropdown-link" href="#" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+            <a class="nav-link mx-auto dropdown-toggle" id="dropdown-link" href="#" data-bs-toggle="dropdown" aria-expanded="false">Hello <%= current_user.first_name %></a>
             <ul class="dropdown-menu" aria-labelledby="dropdown07">
               <%= link_to 'My Profile', user_profile_path, class: "dropdown-item" %>
 
               <% if !user_signed_in? %>
-                <%= link_to 'Log in', new_user_session_path, class: "dropdown-item" %>
+                <%= link_to 'Log In', new_user_session_path, class: "dropdown-item" %>
               <% else %>
-                <%= link_to 'Log out', destroy_user_session_path, method: "delete", class: "dropdown-item" %>
+                <%= link_to 'Log Out', destroy_user_session_path, method: "delete", class: "dropdown-item" %>
               <% end %>
             </ul>
           </li>
@@ -76,14 +76,14 @@
 
         <% if !user_signed_in? %>
           <li class="nav-item">
-            <%= link_to 'Log in', new_user_session_path, class: "nav-link active" %>
+            <%= link_to 'Log In', new_user_session_path, class: "nav-link active" %>
           </li>
           <li class="nav-item">
             <!-- Improvised way to make a divider between navbar links -->
             <%= link_to '|', "#", class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Sign up', new_user_registration_path, class: "nav-link active" %>
+            <%= link_to 'Sign Up', new_user_registration_path, class: "nav-link active" %>
           </li>
         <% end %>
       </ul>

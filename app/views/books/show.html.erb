@@ -10,7 +10,8 @@
     <p>By <%= link_to "#{@book.author.first_name} #{@book.author.last_name}", author_path(@book.author.id) %></p>
     <p>Format: <%= @book.format %></p>
     
-    <% if (user_signed_in? && @book.user) || has_role?(:admin) %>
+    <!-- The has_role? method is defined in the application_helper.rb file. Its purpose is to make the process of verifying user roles easier -->
+    <% if (user_signed_in? && @book.user.id == current_user.id) || has_role?(:admin) %>
       <span><%= link_to "Edit", edit_book_path %> |</span>
       <span><%= link_to "Delete", @book, method: :delete, data: { confirm: 'Are you sure?' } %></span>
       <br />
@@ -19,14 +20,11 @@
 
     <div class="book-description col-md-7 order-md-2">
       <h5>Summary</h5>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias inventore adipisci eligendi excepturi quod. Fugiat nihil culpa, quis minima magni recusandae esse aliquid optio, expedita aspernatur deserunt earum perferendis repellendus!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias inventore adipisci eligendi excepturi quod. Fugiat nihil culpa, quis minima magni recusandae esse aliquid optio, expedita aspernatur deserunt earum perferendis repellendus!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias inventore adipisci eligendi excepturi quod. Fugiat nihil culpa, quis minima magni recusandae esse aliquid optio, expedita aspernatur deserunt earum perferendis repellendus!
-      </p>
+      <p><%= @book.description %></p>
     </div>
   </div>
   
+  <!-- These divs are called basket because I tried to implement a cart feature and forgot to change their names across the project after it didn't work -->
   <div class="basket">  
     <div class="basket-links">
       <% if user_signed_in? %>
@@ -61,5 +59,7 @@
 
 <br><br><br>
 
+<!-- This partial renders JavaScript code to make the Stripe payment system work within this page -->
 <%= render "shared/stripe" %>
+
 

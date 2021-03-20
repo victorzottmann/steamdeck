@@ -1,6 +1,14 @@
 
 var mymap = L.map('map').setView([-33.8658567,151.1981942], 12);
 
+// Mapbox
+mapboxgl.accessToken = 'pk.eyJ1IjoidnpvdHRtYW5uIiwiYSI6ImNrbTh6cmZ0cTFkN2IydXBiNmZnY2NoM2UifQ.xZGcGO6IhY22ETZajNOoTg';
+
+var map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v11'
+});
+
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
   maxZoom: 17,
@@ -31,13 +39,3 @@ L.marker([-33.921854, 151.256488]).addTo(mymap).bindPopup("<p>STEAMdeck Coogee<b
 
 // Manly
 L.marker([-33.797082, 151.286346]).addTo(mymap).bindPopup("<p>STEAMdeck Manly<br><br> Mon - Fri: 9am to 6pm</p>");
-
-
-
-// Mapbox
-mapboxgl.accessToken = 'pk.eyJ1IjoidnpvdHRtYW5uIiwiYSI6ImNrbTh6cmZ0cTFkN2IydXBiNmZnY2NoM2UifQ.xZGcGO6IhY22ETZajNOoTg';
-
-var map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v11'
-});

@@ -1,3 +1,6 @@
+<!-- I realised in the last minute that this whole page could've been rendered through a partial-->
+
+
 <div class="container-fluid">
   <h2 class="hero-title text-center m-5">My Profile</h2>
 </div>
@@ -17,10 +20,13 @@
       <% if has_role?(:admin) %>
         <p style="text-align: center;">Admin</p>
       <% end %>
-      <div class="options-container">
-        <%= link_to "Edit Profile", edit_user_path, class: "btn" %>
-        <%= link_to "Account Settings", edit_user_registration_path, class: "btn" %>
-      </div>
+
+      <% if user_signed_in? && @user.id == current_user.id %> 
+        <div class="options-container">
+          <%= link_to "Edit Profile", edit_user_path, class: "btn" %>
+          <%= link_to "Account Settings", edit_user_registration_path, class: "btn" %>
+        </div>
+      <% end %>
       <hr>
       <h5>Bio</h5>
       <p class="card-text"><%= @user.bio %></p>
@@ -43,9 +49,13 @@
         <h6><%= link_to "#{book.title}", book_path(book.id), class: "card-title" %></h6>
         <p style="text-align: center;"><%= link_to "#{book.author.first_name} #{book.author.last_name}", author_path(book.author.id), class: "card-text" %></p>
         <hr>
-        <div class="card-text">
-          <p><%= link_to "View", book_path(book.id) %> | <%= link_to "Edit", edit_book_path(book.id) %></p>
-        </div>
+        <% if book.user.id == current_user.id %>  
+          <div class="card-text">
+            <p><%= link_to "View", book_path(book.id) %> | <%= link_to "Edit", edit_book_path(book.id) %></p>
+          </div>
+        <% else %>
+          <p><%= link_to "View", book_path(book.id) %></p>
+        <% end %>
       </div>
     </div>
   <% end %>
@@ -66,7 +76,11 @@
         <p style="text-align: center;"><%= link_to "#{rental.book.author.first_name} #{rental.book.author.last_name}", author_path(rental.book.author.id), class: "card-text" %></p>
         <hr>
         <div class="card-text">
-          <p><%= link_to "View", book_path(rental.book.id) %> | <%= link_to "Return", rental_path(rental.book.id) %></p>
+          <p><%= link_to "View", book_path(rental.book.id) %></p>
+
+          <!-- I didn't implement the return book feature due to lack of time -->
+          <!-- It wasn't a critical feature, just a 'nice to have' one -->
+          <!-- | <%= link_to "Return", rental_path(rental.book.id) %> -->
         </div>
       </div>
     </div>

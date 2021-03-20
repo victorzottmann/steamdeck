@@ -1,65 +1,85 @@
 # STEAMdeck - Academic Rentals
 
----
-
 STEAMdeck is a two-sided marketplace focused on affordable academic book rentals. The acronym STEAM means Science, Technology, Engineering, Arts, and Maths. 
 
-
 ## Links
-
----
 
 ### Deployed app: https://steamdeck.herokuapp.com/
 
 ### GitHub Repo: https://github.com/victorzottmann/steamdeck
 
-
+---
 
 ## Local Setup Instructions
 
----
-
 - Clone this repository
+
 - Run `$ gem install bundler`  (if you don't have Bundler installed)
+
 - Run `$ yarn install --check-files`
+
 - Run ` $ bundle` to install all the required gems and dependencies for the app (as described in the Gemfile).
+
 - Run `$ rake db:setup` to create a local database of the app and seed pre-defined data
-- Run `$ rails s` to load the server
+
+- File storage is handled by Amazon S3; payments by Stripe; and webhook endpoints by Ultrahook. To get them working, make sure you go over the following steps:
+
+  - To enable Amazon S3, uncomment the `amazon` section of the `config/storage.yml` file, then specify your region and bucket name. The public and secret keys must be passed in using Rails secure method:
+
+    ```yaml
+    access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+    secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+    ```
+
+    Then follow the instructions provided in the file to insert your AWS credentials. 
+
+  - To enable Stripe you must make an account to obtain your public and secret keys. Once you have them, they should also be inserted in the Rails credentials file to be encrypted. It is also demanded that you create the file `config/initializers/stripe.rb` in order to safely decrypt your keys for usage in the app. The file should contain this command:
+
+    ```ruby
+    Stripe.api_key = Rails.application.credentials.dig(:stripe, :secret_key)
+    ```
+
+  - To enable Ultrahoook you must also register an account to obtain your API key and follow the instructions provided on their website. In Stripe's website you must also create a webhook endpoint that points to the address that you provide (e.g. https://steamdeck-stripe.ultrahook.com/payments/webhook). The address must have the `/payments/webhook` section, otherwise it will not work. The settings for this will be located under the `Developers` sidebar menu in **Stripe's website**. Also, make sure that you select add the event called `checkout.session.completed` when creating an endpoint, otherwise the inventory update feature will not work. For example:
+
+    ![ultrahook](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/ultrahook.png)
+
+    Finally, given that the application is normally loaded through port 3000, running ultrahook requires the following command: `ultrahook stripe 3000`
+
+- **The code was written in Ruby 2.7.2**. If for any reason you are unable to run the server, make sure you have this version installed.
+
+- Once you have everything set up, run `$ rails s` in the terminal to start the server
+
 - Load http://localhost:3000/ in the browser to run the app
 
 #### Login Credentials from Pre-Defined Data (Database Seeds)
 
-| Name            | Email           | Password |
-| --------------- | --------------- | -------- |
-| Victor Zottmann | admin@gmail.com | 000000   |
-| Lily Dawson     | l@gmail.com     | 000000   |
-| John Markson    | j@gmail.com     | 000000   |
-
-
-
-## Purpose & Problem
+| Name                    | Email           | Password |
+| ----------------------- | --------------- | -------- |
+| Victor Zottmann (admin) | admin@gmail.com | 000000   |
+| Lily Dawson             | l@gmail.com     | 000000   |
+| John Markson            | j@gmail.com     | 000000   |
 
 ---
 
-Generally, academic and technical books tend to be quite expensive, with some only being available to order in Euros (EUR) or British Pounds (GBP). Indeed, students already enrolled in universities are given the ability to download many of them for free, or access them through the publisher's portal for a limited timeframe. However, many people might not be in the appropriate conditions to attend university, or the current institution in which they are enrolled does not have access to specifc books. 
+## Purpose & Problem
+
+Generally, academic and technical books tend to be quite expensive, with some only being available to order in Euros (EUR) or British Pounds (GBP). Indeed, students already enrolled in universities are given the ability to download many of them for free, or access them through the publisher's portal for a limited timeframe. However, many people might not be in the appropriate conditions to attend university, or the current institution in which they are enrolled does not have access to specifc books. It is also very common for even the digital versions of such books to be as expensive as their physical counterparts.
 
 For example, the following images display the price of two technical books from a renowned publisher––the publisher's name has been omitted for privacy purposes. 
 
-<img src="/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/soundscape-book.png" alt="soundscape-book" style="zoom: 33%;" />
+<img src="/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/soundscape-book.png" alt="soundscape-book"  />
 
 
 
-<img src="/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/acoustics-book.png" alt="acoustics-book" style="zoom:33%;" />
+<img src="/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/acoustics-book.png" alt="acoustics-book"  />
 
 
 
 The proposition of STEAMdeck is to enable the target audience to rent such books at a very low price, ranging between $5 AUD and $10 AUD. However, given the scope of this project, no user-centered research has been conducted in order to identify how would people use the service, nor which features would they like to have available. Therefore, what follows is the description of a very early prototype of what could potentially become an actual business.
 
- 
+---
 
 ## Features
-
----
 
 STEAMdeck currently supports a limited number of features:
 
@@ -76,11 +96,153 @@ STEAMdeck currently supports a limited number of features:
 
 STEAMdeck also envisions a different method of exchanging books, as opposed to simply having it delivered at home or picking it up in a given location. The books registered in the platform belong to any given user. When renting the book, users can see who is kindly sharing it in the platform. Despite not being possible to message users at this stage, this is a feature that would definitely improve the user experience.
 
+#### Interactive Map Integration
+
+A key feature of the app is the ability for users to interact with a map to view store locations and opening hours. The implementation was made possible by integrating both the LeafletJS and Mapbox APIs. Leaflet is a user-friendly and open-source API for creating interactive maps. Their documentation is very easy to follow as well. As shown in the image below, Mapbox is an API that provides map tiles, whereas Leaflet is concerned with the container in which the tiles will be displayed in. 
+
+<img src="/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/maps.png" alt="maps" style="zoom: 50%;" />
+
+As displayed in the code snippets below, integrating both APIs within a Ruby on Rails project is fairly straight-forward. This can be done either by linking directly to the Leaftlet and Mapbox JavaScript files in the `application.html.erb` file, or by installing Leafleft as a gem. I chose the former as the latter seemed to be less intuitive.
+
+##### In `views/layouts/application.html.erb`:
+
+```erb
+<!-- Add the following links to the HEAD section of the file. The details can be found on their websites. -->
+<head>
+  <!-- For Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin="">			</script>
+  
+  <!-- For Mapbox -->
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+</head>
+```
+
+##### In `javacript/packs` add a file with whichever name you want (e.g. `index.js`), then add the following:
+
+```javascript
+// This generates the map container and sets the view to the latitude and longitude, as well as the zoom level (max = 18)
+var mymap = L.map('map').setView([latitude, longitude], zoom_level);
+
+// Mapbox implementation
+mapboxgl.accessToken = 'your_mapbox_public_key';
+var map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v11'
+});
+
+// This adds the tiles from Mapbox, attributes the copyright to each respective contributor, sets the max zoom level and other properties, includes your public key for accessing the Mapbox tiles, then adds all of it to the map, as declared above.
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  maxZoom: 17,
+  id: 'mapbox/streets-v11',
+  tileSize: 512,
+  zoomOffset: -1,
+  accessToken: 'your_mapbox_public_key'
+}).addTo(mymap);
+
+// This adds a pin marker to the given latitude and longitude values below and binds a popup message. In this case, the message displays the store name and opening hours.
+L.marker([-33.869438, 151.208278]).addTo(mymap).bindPopup("<p>STEAMdeck Sydney CBD<br><br> Mon - Fri: 9am to 9pm</p>");
+```
+
+One downside of this, however, is that the public key does not lie in any encrypted files. I have tried storing it in the Rails credentials, changing the JavaScript file to `index.js.erb` in order to pass in the `Rails.application.credentials.dig` code as the access token, but it is not possible to do so. There does not seems to be a way to embed Ruby code into JavaScript code unfortunately. On the other hand, given that Mapbox is a free service and there is nothing dangerous to be stolen from my account, this might not be much of an issue in this case. Perhaps implementing Leaflet as a gem would make it possible to hide the access token, but I would not know for sure at this stage.
+
+Finally, to load the map into the view page of choice, one must simply include a `javascript_pack_tag` and pass in the directory for the `index.js` file within a `<div>` with an `id` that is equal to `map`, like this:
+
+```erb
+<div class="map-container">
+  <h5 class="map-heading">
+    Locations Available for Pickup:
+    <br><br>
+    <p class="location-subs">(click on the pins to view store hours)</p>
+  </h5>
+  <div id="map">
+    <%= javascript_pack_tag "leaflet/index" %>
+  </div>
+</div>
+```
+
+
+
+#### Payments Integration with Stripe and Ultrahook
+
+As opposed to the maps implementation, Stripe was added to the app as a Ruby gem and its public and secret keys were properly encrypted in the Rails credentials. Stripe is a payments API that is both easy to use and reliable. When accessing a view page for any given book, users can see how many items are in stock and are provided with the ability to rent the book. Stripe is enabled directly from the `show` method in the `BooksController`:
+
+```ruby
+class BooksController < ApplicationController
+  def show
+    # current_user is a method implemented by the Devise gem for handling user authentication
+    @user = current_user 
+    # set_book is a private method that finds a book by its id.
+    set_book
+
+    if user_signed_in?
+      # This creates a session for when the user view a given book.
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        customer_email: current_user.email,
+        line_items: [{
+          name: @book.title,
+          amount: (@book.price * 100),
+          currency: 'aud',
+          quantity: 1
+          }],
+        payment_intent_data: {
+          # The metadata included here are used to feed provide Ultrahook with information once a payment is 					 made.
+          metadata: {
+            user_id: current_user.id,
+            book_id: @book.id
+            }
+          },
+        success_url: "#{root_url}payments/success?bookId=#{@book.id}",
+        cancel_url: "#{root_url}books"
+        )
+      @session_id = session.id
+    end
+  end
+end
+```
+
+The configurations for Ultrahook are then set in the `PaymentsController`:
+
+```ruby
+class PaymentsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:webhook]
+
+  def success
+  end
+
+  def webhook
+    payment_id = params[:data][:object][:payment_intent]
+    payment = Stripe::PaymentIntent.retrieve(payment_id)
+    
+    # This assigns the metadata described above into two variables
+    book = Book.find(payment.metadata.book_id) 
+    buyer = User.find(payment.metadata.user_id)
+
+    # Then, the assigned metadata is used to create a new rental for the user
+    rental = Rental.create(user_id: buyer.id, book_id: book.id)
+    # This saves it to the database.
+    rental.save!
+    
+    # Once a payment is made, the inventory for the given book decreases by 1 and updates the database
+    book.quantity -= 1
+    if book.quantity <= 0
+      book.available = false
+    end
+    book.save!
+
+    status 200
+  end
+end
+```
+
+---
+
 
 
 ## User Stories
-
----
 
 - As a user, I would like to rent academic books at a low price.
 - As a user, I would like to share my own books as well. 
@@ -93,23 +255,23 @@ STEAMdeck also envisions a different method of exchanging books, as opposed to s
 
 - As a user, I would like to have the option to either rent or purchase a book.
 
+  
 
+---
 
 ## Sitemap
 
----
-
 ![Sitemap](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/Sitemap.png)
 
-
+---
 
 ## Wireframes
 
+
+
+
+
 ---
-
-
-
-
 
 ## Screenshots
 
@@ -175,11 +337,9 @@ STEAMdeck also envisions a different method of exchanging books, as opposed to s
 
 ![search-results](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/search-results.png)
 
-
+---
 
 ## High-Level Components of the App
-
----
 
 #### 1. Active Record
 
@@ -417,29 +577,11 @@ bucket: "your_bucket_name"
   region: "" # e.g. 'us-east-1'
 ```
 
-
-
-
-
-
-
-
-
-- LeafleftJS + Mapbox
-
-- Devise + CanCanCan + Rolify
-
-- Stripe + Ultrahook updating inventory
-
-  
-
-  
+---
 
 
 
 ## Database Relations
-
----
 
 #### 1. Associations
 
@@ -508,7 +650,32 @@ The following list items display the existing models in the application, followe
 
   ![new-book-author-publisher](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/new-book-author-publisher.png)
 
+  
+  In order for the nested attributes to work properly, they were written like this in the book form:
 
+  ```erb
+  <%= form.fields_for :author do |f| %>
+    <div class="first-last-names">
+      <div>
+        <%= f.label "Author's First Name" %>
+        <%= f.text_field :first_name, class: "form-control first-name", autofocus: true, autocomplete: 					"email" %>
+      </div>
+      <div>
+        <%= f.label "Author's Last Name" %>
+        <%= f.text_field :last_name, class: "form-control last-name", autofocus: true, autocomplete: 						"email" %>
+      </div>
+    </div>
+  <% end %>
+  <br>
+  <div class="field">
+    <%= form.fields_for :publisher do |f| %>
+    	<%= f.label :publisher %>
+    	<%= f.text_field :name, class: "form-control", autocomplete: "off" %>
+    <% end %>
+  </div>
+  ```
+
+  
 
 - Category
 
@@ -721,13 +888,11 @@ add_foreign_key "rentals", "users"
 
 ![Steamdeck-ERD](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/Steamdeck-ERD.png)
 
-
+---
 
 
 
 ## Third Party Services
-
----
 
 | Service    | Description                                                  |
 | ---------- | ------------------------------------------------------------ |
@@ -739,27 +904,25 @@ add_foreign_key "rentals", "users"
 | Mapbox     | Open-source library for displaying maps. While Leaflet is used to implement the map, Mapbox provides the map tiles for the map display itself. Mapbox is among some of the platforms recommended by Leaflet. The map tiles are displayed through JavaScript. |
 | Rolify     | Library used to implement user roles (e.g. admin, moderator, etc.). It is well integrated with Devise and CanCanCan. |
 | Stripe     | Transactions platform chosen for the app. Stripe's API allows users to test transactions securely (i.e. cashless transactions). |
-| Ultrahook  | Platform that provides realtime webhook endpoints. For example, when integrated with Stripe, by default a cart would be set as *incomplete*. Once the user submits a payment, the webhook would set the boolean to *complete*, thus updating a given parameter related to the cart. |
-
-
-
-## Tech Stack
+| Ultrahook  | Platform that provides realtime webhook endpoints. For example, when integrated with Stripe, whenever the user makes a transaction, ultrahook sets the quantity of the given book to decrease by 1. When the user goes back to the book page, the quantity displayed is automatically updated. |
 
 ---
 
-- **HTML 5**: Markup language to structure the visuals of a website
+## Tech Stack
+
+- **HTML 5**: Markup language to structure the visuals of a website.
 
 - **CSS 3 / SASS**: Styling language to modify the visuals of a website. SASS is a pre-processor that makes CSS more pleasant to work with.
 
-- **Ruby on Rails**: Back end framework for the Ruby programming language  
+- **Ruby on Rails**: Back end framework based on the Ruby programming language.
 
-- **PostgreSQL**: Relational database management system
+- **PostgreSQL**: Relational database management system.
 
-- **Heroku**: Deployment platform (Rails industry standard)
+- **Heroku**: Deployment platform (Rails industry standard).
 
 - **Git / GitHub**: Platform for version control.
 
-- **Trello**: Platform for task and project management
+- **Trello**: Platform for task and project management.
 
   
 

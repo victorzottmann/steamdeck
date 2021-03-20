@@ -24,6 +24,7 @@ if User.count == 0
     last_name: "Zottmann",
     email: "admin@gmail.com",
     password: "000000",
+    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae sed assumenda vero laborum labore quaerat repudiandae eligendi illum dolor eveniet, alias inventore, hic molestias debitis aperiam? Distinctio explicabo sequi similique."
   )
   user1.profile_picture.attach(
     io: File.open("app/assets/images/users/admin.jpg"),
@@ -38,7 +39,8 @@ if User.count == 0
     first_name: "Lily",
     last_name: "Dawson",
     email: "l@gmail.com",
-    password: "000000"
+    password: "000000",
+    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae sed assumenda vero laborum labore quaerat repudiandae eligendi illum dolor eveniet, alias inventore, hic molestias debitis aperiam? Distinctio explicabo sequi similique."
   )
   user2.profile_picture.attach(
     io: File.open("app/assets/images/users/lily.jpg"),
@@ -51,7 +53,8 @@ if User.count == 0
     first_name: "John",
     last_name: "Markson",
     email: "j@gmail.com",
-    password: "000000"
+    password: "000000",
+    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae sed assumenda vero laborum labore quaerat repudiandae eligendi illum dolor eveniet, alias inventore, hic molestias debitis aperiam? Distinctio explicabo sequi similique."
   )
   user3.profile_picture.attach(
     io: File.open("app/assets/images/users/john.jpg"),
@@ -102,13 +105,14 @@ end
 if Book.count == 0
   book1 = Book.create(
     title: "Building Acoustics",
+    description: "Building Acoustics is devoted to practical building and room acoustics, illustrated by numerous examples. It introduces the basics for the different specialists in a design team and for the client and sets out the issues for shared consideration. It guides them in the drawing up of sensible acoustic specifications. It is written for non-specialists and gives an outline of potential problems. It also shows what to consider before the construction stage. It empowers its readers to express their needs to a specialist consultant and to avoid the worst pitfalls. (Source: Google Books).",
     edition: 1,
     pages: 984,
     date: "05-02-2014",
     format: "Paperback",
     price: 5.00,
     quantity: 2,
-    available: true,
+    available: true, 
     author_id: 1, # Marc Asselineau
     publisher_id: 1, # CRC Press
     category_id: 4, # Science
@@ -122,6 +126,7 @@ if Book.count == 0
 
   book2 = Book.create(
     title: "The Design of Everyday Things",
+    description: "The Design of Everyday Things shows that good, usable design is possible. The rules are simple: make things visible, exploit natural relationships that couple function and control, and make intelligent use of constraints. The goal: guide the user effortlessly to the right action on the right control at the right time. (Source: Google Books).",
     edition: 1,
     pages: 384,
     date: "05-11-2013",
@@ -142,6 +147,7 @@ if Book.count == 0
 
   book3 = Book.create(
     title: "Introduction to Architectural Science",
+    description: "Now in its third edition, this book provides the ideal and only reference to the physical basis of architectural design. Fully updated and expanded throughout, the book provides the data required for architects to design buildings that will maintain the users comfort in a variety of conditions, with minimal reliance on energy intensive methods like air conditioning. This is not a ‘how to’ book but answers the question why. It equips the reader with the tools to realize the full potential of the good intentions of sustainable, bioclimatic design. (Source: Google Books).",
     edition: 3,
     pages: 392,
     date: "10-03-2014",
@@ -162,6 +168,7 @@ if Book.count == 0
 
   book4 = Book.create(
     title: "In the Blink of an Eye",
+    description: "In the Blink of an Eye is celebrated film editor Walter Murch's vivid, multifaceted, thought -- provoking essay on film editing. Starting with what might be the most basic editing question -- Why do cuts work? -- Murch treats the reader to a wonderful ride through the aesthetics and practical concerns of cutting film. Along the way, he offers his unique insights on such subjects as continuity and discontinuity in editing, dreaming, and reality; criteria for a good cut; the blink of the eye as an emotional cue; digital editing; and much more. In this second edition, Murch reconsiders and completely revises his popular first edition's lengthy meditation on digital editing (which accounts for a third of the book's pages) in light of the technological changes that have taken place in the six years since its publication. (Source: Google Books).",
     edition: 2,
     pages: 146,
     date: "08-08-2001",
