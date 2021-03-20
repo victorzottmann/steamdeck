@@ -506,9 +506,9 @@ Corresponding to the V in MVC, the Action View is what allows Ruby code to be em
 
 <!-- The <%  %> without the equal sign tells HTML not to display, but to only run the code instead. In addition, CSS classes can be included in erb code, however, they must be written with a colon instead of around quotes -->
 <% if condition %> 
-	<%= link_to 'Log in', new_user_session_path, class: "dropdown-item" %>
+  <%= link_to 'Log in', new_user_session_path, class: "dropdown-item" %>
 <% else %>
-	<%= link_to 'Log out', destroy_user_session_path, method: "delete", class: "dropdown-item" %>
+  <%= link_to 'Log out', destroy_user_session_path, method: "delete", class: "dropdown-item" %>
 <% end %>
 ```
 
@@ -527,13 +527,11 @@ Instead of copying the footer to every single view, one can store it in a partia
 
 ```erb
 <body>
-	<%= render "shared/navbar" %>
-  
-	<div class="container">
-		<%= yield %> <!-- yield grabs all content from all erb files -->
-	</div>
-  
-	<%= render "shared/footer" %>
+  <%= render "shared/navbar" %>
+  <div class="container">
+    <%= yield %> <!-- yield grabs all content from all erb files -->
+  </div>
+  <%= render "shared/footer" %>
 </body>
 ```
 
@@ -900,7 +898,7 @@ add_foreign_key "rentals", "users"
 
 - ### Entity Relationship Diagram (ERD)
 
-![Steamdeck-ERD](app/assets/images/screenshots/ERD.png)
+![Entity Relationship Diagram](app/assets/images/screenshots/ERD.png)
 
 ---
 
