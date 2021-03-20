@@ -71,7 +71,7 @@ For example, the following images display the price of two technical books from 
 
 
 
-<img src="/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/acoustics-book.png" alt="acoustics-book"  />
+<img src="app/assets/images/screenshots/acoustics-book.png" alt="acoustics-book"  />
 
 
 
@@ -100,7 +100,7 @@ STEAMdeck also envisions a different method of exchanging books, as opposed to s
 
 A key feature of the app is the ability for users to interact with a map to view store locations and opening hours. The implementation was made possible by integrating both the LeafletJS and Mapbox APIs. Leaflet is a user-friendly and open-source API for creating interactive maps. Their documentation is very easy to follow as well. As shown in the image below, Mapbox is an API that provides map tiles, whereas Leaflet is concerned with the container in which the tiles will be displayed in. 
 
-<img src="/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/maps.png" alt="maps" style="zoom: 50%;" />
+<img src="app/assets/images/screenshots/screenshots/maps.png" alt="maps" style="zoom: 50%;" />
 
 As displayed in the code snippets below, integrating both APIs within a Ruby on Rails project is fairly straight-forward. This can be done either by linking directly to the Leaftlet and Mapbox JavaScript files in the `application.html.erb` file, or by installing Leafleft as a gem. I chose the former as the latter seemed to be less intuitive.
 
@@ -265,7 +265,7 @@ end
 
 ## Sitemap
 
-![Sitemap](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/Sitemap.png)
+![Sitemap](app/assets/images/screenshots/Sitemap.png)
 
 ---
 
@@ -275,19 +275,19 @@ In all honesty, I did not put too much effort into the wireframes this time. I h
 
 #### Home page
 
-![Home Page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/wireframes/Home Page.png)
+![Home Page](app/assets/images/wireframes/Home Page.png)
 
 
 
 #### Book page
 
-![Book Page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/wireframes/Book Page.png)
+![Book Page](app/assets/images/wireframes/Book Page.png)
 
 
 
 #### User profile page
 
-![Profile Page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/wireframes/Profile Page.png)
+![Profile Page](app/assets/images/wireframes/Profile Page.png)
 
 
 
@@ -297,65 +297,65 @@ In all honesty, I did not put too much effort into the wireframes this time. I h
 
 #### Sign up page
 
-![signup-page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/signup-page.png)
+![signup-page](app/assets/images/screenshots/signup-page.png)
 
 
 
 #### Login page
 
-![login-page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/login-page.png)
+![login-page](app/assets/images/screenshots/login-page.png)
 
 
 
 #### Home page
 
-![home-page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/home-page.png)
+![home-page](app/assets/images/screenshots/home-page.png)
 
 
 
 #### New book page
 
-![new-book](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/new-book.png)
+![new-book](app/assets/images/screenshots/new-book.png)
 
-![new-book-cont](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/new-book-cont.png)
+![new-book-cont](app/assets/images/screenshots/new-book-cont.png)
 
 
 
 #### Book page
 
-![book-page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/book-page.png)
+![book-page](app/assets/images/screenshots/book-page.png)
 
 
 
 #### Payment page
 
-![payment-page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/payment-page.png)
+![payment-page](app/assets/images/screenshots/payment-page.png)
 
 
 
 #### User profile page. Once a transaction is made, the 'My Rentals' link appears on the nav bar
 
-![my-profile](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/my-profile.png)
+![my-profile](app/assets/images/screenshots/my-profile.png)
 
-![my-profile-2](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/my-profile-2.png)
+![my-profile-2](app/assets/images/screenshots/my-profile-2.png)
 
 
 
 #### User profile editing page
 
-![edit-profile](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/edit-profile.png)
+![edit-profile](app/assets/images/screenshots/edit-profile.png)
 
 
 
 #### Profile page from other users
 
-![user-profile](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/user-profile.png)
+![user-profile](app/assets/images/screenshots/user-profile.png)
 
 
 
 #### Search results for the letter 'y'
 
-![search-results](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/search-results.png)
+![search-results](app/assets/images/screenshots/search-results.png)
 
 ---
 
@@ -668,7 +668,7 @@ The following list items display the existing models in the application, followe
 
   Finally, as it can be seen below, the form for creating a new book contains the required parameters for writing the input into the database.
 
-  ![new-book-author-publisher](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/new-book-author-publisher.png)
+  ![new-book-author-publisher](app/assets/images/screenshots/new-book-author-publisher.png)
 
 
   In order for the nested attributes to work properly, they were written like this in the book form:
@@ -903,7 +903,7 @@ add_foreign_key "rentals", "users"
 
 - ### Entity Relationship Diagram (ERD)
 
-![Steamdeck-ERD](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/Steamdeck-ERD.png)
+![Steamdeck-ERD](app/assets/images/screenshots/ERD.png)
 
 ---
 
@@ -913,7 +913,7 @@ To be fair, I did not use Trello too much to track my progress. I admit that, fo
 
 ##### Link to Trello Board: https://trello.com/b/xumu0k5E/rails-assignment-t2a2-victor-zottmann
 
-![trello](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/trello.png)
+![trello](app/assets/images/screenshots/trello.png)
 
 ---
 
@@ -944,12 +944,3 @@ To be fair, I did not use Trello too much to track my progress. I admit that, fo
 - **Heroku**: Deployment platform (Rails industry standard).
 - **Git / GitHub**: Platform for version control.
 - **Trello**: Platform for task and project management.
-
-
-
-
-
-
-
-
-
