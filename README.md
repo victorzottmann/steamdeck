@@ -100,7 +100,7 @@ STEAMdeck also envisions a different method of exchanging books, as opposed to s
 
 A key feature of the app is the ability for users to interact with a map to view store locations and opening hours. The implementation was made possible by integrating both the LeafletJS and Mapbox APIs. Leaflet is a user-friendly and open-source API for creating interactive maps. Their documentation is very easy to follow as well. As shown in the image below, Mapbox is an API that provides map tiles, whereas Leaflet is concerned with the container in which the tiles will be displayed in. 
 
-<img src="app/assets/images/screenshots/screenshots/maps.png" alt="maps" style="zoom: 50%;" />
+<img src="app/assets/images/screenshots/maps.png" alt="maps" style="zoom: 50%;" />
 
 As displayed in the code snippets below, integrating both APIs within a Ruby on Rails project is fairly straight-forward. This can be done either by linking directly to the Leaftlet and Mapbox JavaScript files in the `application.html.erb` file, or by installing Leafleft as a gem. I chose the former as the latter seemed to be less intuitive.
 
