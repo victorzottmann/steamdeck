@@ -41,7 +41,7 @@ STEAMdeck is a two-sided marketplace focused on affordable academic book rentals
 
   - To enable Ultrahoook you must also register an account to obtain your API key and follow the instructions provided on their website. In Stripe's website you must also create a webhook endpoint that points to the address that you provide (e.g. https://steamdeck-stripe.ultrahook.com/payments/webhook). The address must have the `/payments/webhook` section, otherwise it will not work. The settings for this will be located under the `Developers` sidebar menu in **Stripe's website**. Also, make sure that you select add the event called `checkout.session.completed` when creating an endpoint, otherwise the inventory update feature will not work. For example:
 
-    ![ultrahook](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/ultrahook.png)
+    ![ultrahook](app/assets/images/screenshots/ultrahook.png)
 
     Finally, given that the application is normally loaded through port 3000, running ultrahook requires the following command: `ultrahook stripe 3000`
 
@@ -249,7 +249,6 @@ end
 - As a user, I would like to see where are the store locations around Sydney.
 - As a user, I would like to check the opening hours of each store.
 - As a user, I would like to easily find a book I am after by searching for it.
-- 
 
 #### User stories for future implementations
 
@@ -257,17 +256,15 @@ end
 
 - As a user, I would like to message other users.
 
-- 
-
-  
-
 ---
+
 
 ## Sitemap
 
 ![Sitemap](app/assets/images/screenshots/Sitemap.png)
 
 ---
+
 
 ## Wireframes
 
