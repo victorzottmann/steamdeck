@@ -67,7 +67,7 @@ Generally, academic and technical books tend to be quite expensive, with some on
 
 For example, the following images display the price of two technical books from a renowned publisher––the publisher's name has been omitted for privacy purposes. 
 
-<img src="/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/soundscape-book.png" alt="soundscape-book"  />
+<img src="app/assets/images/screenshots/soundscape-book.png" alt="soundscape-book"  />
 
 
 
