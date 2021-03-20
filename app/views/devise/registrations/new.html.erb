@@ -46,9 +46,9 @@
     </div>
     <br>
     <div class="actions">
-      <%= link_to "Log in", new_user_session_path, class: "btn btn-md", id: "login-btn" %>
-      <p>OR</p>
       <%= f.submit "Sign up", class: "btn btn-md", id: "signup-btn" %>
+      <p>OR</p>
+      <%= link_to "Log in", new_user_session_path, class: "btn btn-md", id: "login-btn" %>
     </div>
   <% end %>
 </div>
