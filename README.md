@@ -272,19 +272,19 @@ In all honesty, I did not put too much effort into the wireframes this time. I h
 
 #### Home page
 
-![Home Page](app/assets/images/wireframes/Home Page.png)
+![Home Page](app/assets/images/wireframes/home-page.png)
 
 
 
 #### Book page
 
-![Book Page](app/assets/images/wireframes/Book Page.png)
+![Book Page](app/assets/images/wireframes/book-page.png)
 
 
 
 #### User profile page
 
-![Profile Page](app/assets/images/wireframes/Profile Page.png)
+![Profile Page](app/assets/images/wireframes/profile-page.png)
 
 
 
