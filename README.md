@@ -41,7 +41,7 @@ STEAMdeck is a two-sided marketplace focused on affordable academic book rentals
 
   - To enable Ultrahoook you must also register an account to obtain your API key and follow the instructions provided on their website. In Stripe's website you must also create a webhook endpoint that points to the address that you provide (e.g. https://steamdeck-stripe.ultrahook.com/payments/webhook). The address must have the `/payments/webhook` section, otherwise it will not work. The settings for this will be located under the `Developers` sidebar menu in **Stripe's website**. Also, make sure that you select add the event called `checkout.session.completed` when creating an endpoint, otherwise the inventory update feature will not work. For example:
 
-    ![ultrahook](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/ultrahook.png)
+    ![ultrahook](app/assets/images/screenshots/ultrahook.png)
 
     Finally, given that the application is normally loaded through port 3000, running ultrahook requires the following command: `ultrahook stripe 3000`
 
@@ -67,11 +67,11 @@ Generally, academic and technical books tend to be quite expensive, with some on
 
 For example, the following images display the price of two technical books from a renowned publisher––the publisher's name has been omitted for privacy purposes. 
 
-<img src="/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/soundscape-book.png" alt="soundscape-book"  />
+<img src="app/assets/images/screenshots/soundscape-book.png" alt="soundscape-book"  />
 
 
 
-<img src="/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/acoustics-book.png" alt="acoustics-book"  />
+<img src="app/assets/images/screenshots/acoustics-book.png" alt="acoustics-book"  />
 
 
 
@@ -100,7 +100,7 @@ STEAMdeck also envisions a different method of exchanging books, as opposed to s
 
 A key feature of the app is the ability for users to interact with a map to view store locations and opening hours. The implementation was made possible by integrating both the LeafletJS and Mapbox APIs. Leaflet is a user-friendly and open-source API for creating interactive maps. Their documentation is very easy to follow as well. As shown in the image below, Mapbox is an API that provides map tiles, whereas Leaflet is concerned with the container in which the tiles will be displayed in. 
 
-<img src="/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/maps.png" alt="maps" style="zoom: 50%;" />
+<img src="app/assets/images/screenshots/maps.png" alt="maps" style="zoom: 33%;" />
 
 As displayed in the code snippets below, integrating both APIs within a Ruby on Rails project is fairly straight-forward. This can be done either by linking directly to the Leaftlet and Mapbox JavaScript files in the `application.html.erb` file, or by installing Leafleft as a gem. I chose the former as the latter seemed to be less intuitive.
 
@@ -111,11 +111,11 @@ As displayed in the code snippets below, integrating both APIs within a Ruby on 
 <head>
   <!-- For Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin="">			</script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
   
   <!-- For Mapbox -->
   <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
-	<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
 </head>
 ```
 
@@ -134,7 +134,7 @@ var map = new mapboxgl.Map({
 
 // This adds the tiles from Mapbox, attributes the copyright to each respective contributor, sets the max zoom level and other properties, includes your public key for accessing the Mapbox tiles, then adds all of it to the map, as declared above.
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a            href="https://www.mapbox.com/">Mapbox</a>',
   maxZoom: 17,
   id: 'mapbox/streets-v11',
   tileSize: 512,
@@ -249,7 +249,6 @@ end
 - As a user, I would like to see where are the store locations around Sydney.
 - As a user, I would like to check the opening hours of each store.
 - As a user, I would like to easily find a book I am after by searching for it.
-- 
 
 #### User stories for future implementations
 
@@ -257,17 +256,15 @@ end
 
 - As a user, I would like to message other users.
 
-- 
-
-  
-
 ---
+
 
 ## Sitemap
 
-![Sitemap](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/Sitemap.png)
+![Sitemap](app/assets/images/screenshots/Sitemap.png)
 
 ---
+
 
 ## Wireframes
 
@@ -275,19 +272,19 @@ In all honesty, I did not put too much effort into the wireframes this time. I h
 
 #### Home page
 
-![Home Page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/wireframes/Home Page.png)
+![Home Page](app/assets/images/wireframes/Home Page.png)
 
 
 
 #### Book page
 
-![Book Page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/wireframes/Book Page.png)
+![Book Page](app/assets/images/wireframes/Book Page.png)
 
 
 
 #### User profile page
 
-![Profile Page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/wireframes/Profile Page.png)
+![Profile Page](app/assets/images/wireframes/Profile Page.png)
 
 
 
@@ -297,65 +294,65 @@ In all honesty, I did not put too much effort into the wireframes this time. I h
 
 #### Sign up page
 
-![signup-page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/signup-page.png)
+![signup-page](app/assets/images/screenshots/signup-page.png)
 
 
 
 #### Login page
 
-![login-page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/login-page.png)
+![login-page](app/assets/images/screenshots/login-page.png)
 
 
 
 #### Home page
 
-![home-page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/home-page.png)
+![home-page](app/assets/images/screenshots/home-page.png)
 
 
 
 #### New book page
 
-![new-book](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/new-book.png)
+![new-book](app/assets/images/screenshots/new-book.png)
 
-![new-book-cont](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/new-book-cont.png)
+![new-book-cont](app/assets/images/screenshots/new-book-cont.png)
 
 
 
 #### Book page
 
-![book-page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/book-page.png)
+![book-page](app/assets/images/screenshots/book-page.png)
 
 
 
 #### Payment page
 
-![payment-page](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/payment-page.png)
+![payment-page](app/assets/images/screenshots/payment-page.png)
 
 
 
 #### User profile page. Once a transaction is made, the 'My Rentals' link appears on the nav bar
 
-![my-profile](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/my-profile.png)
+![my-profile](app/assets/images/screenshots/my-profile.png)
 
-![my-profile-2](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/my-profile-2.png)
+![my-profile-2](app/assets/images/screenshots/my-profile-2.png)
 
 
 
 #### User profile editing page
 
-![edit-profile](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/edit-profile.png)
+![edit-profile](app/assets/images/screenshots/edit-profile.png)
 
 
 
 #### Profile page from other users
 
-![user-profile](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/user-profile.png)
+![user-profile](app/assets/images/screenshots/user-profile.png)
 
 
 
 #### Search results for the letter 'y'
 
-![search-results](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/search-results.png)
+![search-results](app/assets/images/screenshots/search-results.png)
 
 ---
 
@@ -509,9 +506,9 @@ Corresponding to the V in MVC, the Action View is what allows Ruby code to be em
 
 <!-- The <%  %> without the equal sign tells HTML not to display, but to only run the code instead. In addition, CSS classes can be included in erb code, however, they must be written with a colon instead of around quotes -->
 <% if condition %> 
-	<%= link_to 'Log in', new_user_session_path, class: "dropdown-item" %>
+  <%= link_to 'Log in', new_user_session_path, class: "dropdown-item" %>
 <% else %>
-	<%= link_to 'Log out', destroy_user_session_path, method: "delete", class: "dropdown-item" %>
+  <%= link_to 'Log out', destroy_user_session_path, method: "delete", class: "dropdown-item" %>
 <% end %>
 ```
 
@@ -530,13 +527,11 @@ Instead of copying the footer to every single view, one can store it in a partia
 
 ```erb
 <body>
-	<%= render "shared/navbar" %>
-  
-	<div class="container">
-		<%= yield %> <!-- yield grabs all content from all erb files -->
-	</div>
-  
-	<%= render "shared/footer" %>
+  <%= render "shared/navbar" %>
+  <div class="container">
+    <%= yield %> <!-- yield grabs all content from all erb files -->
+  </div>
+  <%= render "shared/footer" %>
 </body>
 ```
 
@@ -668,7 +663,7 @@ The following list items display the existing models in the application, followe
 
   Finally, as it can be seen below, the form for creating a new book contains the required parameters for writing the input into the database.
 
-  ![new-book-author-publisher](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/new-book-author-publisher.png)
+  ![new-book-author-publisher](app/assets/images/screenshots/new-book-author-publisher.png)
 
 
   In order for the nested attributes to work properly, they were written like this in the book form:
@@ -903,7 +898,7 @@ add_foreign_key "rentals", "users"
 
 - ### Entity Relationship Diagram (ERD)
 
-![Steamdeck-ERD](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/Steamdeck-ERD.png)
+![Entity Relationship Diagram](app/assets/images/screenshots/ERD.png)
 
 ---
 
@@ -913,7 +908,7 @@ To be fair, I did not use Trello too much to track my progress. I admit that, fo
 
 ##### Link to Trello Board: https://trello.com/b/xumu0k5E/rails-assignment-t2a2-victor-zottmann
 
-![trello](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/trello.png)
+![trello](app/assets/images/screenshots/trello.png)
 
 ---
 
@@ -944,12 +939,3 @@ To be fair, I did not use Trello too much to track my progress. I admit that, fo
 - **Heroku**: Deployment platform (Rails industry standard).
 - **Git / GitHub**: Platform for version control.
 - **Trello**: Platform for task and project management.
-
-
-
-
-
-
-
-
-
