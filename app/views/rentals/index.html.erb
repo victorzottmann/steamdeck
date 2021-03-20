@@ -13,7 +13,10 @@
         <p style="text-align: center;"><%= link_to "#{rental.book.author.first_name} #{rental.book.author.last_name}", author_path(rental.book.author.id), class: "card-text" %></p>
         <hr>
         <div class="card-text">
-          <p><%= link_to "View", book_path(rental.book.id) %> | <%= link_to "Return", rental_path(rental.book.id) %></p>
+          <p><%= link_to "View", book_path(rental.book.id) %></p>
+          <!-- I didn't implement the return book feature due to lack of time -->
+          <!-- It wasn't a critical feature, just a 'nice to have' one -->
+          <!-- | <%= link_to "Return", rental_path(rental.book.id) %> -->
         </div>
       </div>
     </div>
