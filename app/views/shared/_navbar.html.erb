@@ -61,7 +61,7 @@
           <% end %>
 
           <li class="nav-item dropdown">
-            <a class="nav-link mx-auto dropdown-toggle" id="dropdown-link" href="#" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+            <a class="nav-link mx-auto dropdown-toggle" id="dropdown-link" href="#" data-bs-toggle="dropdown" aria-expanded="false">Hello <%= current_user.first_name %></a>
             <ul class="dropdown-menu" aria-labelledby="dropdown07">
               <%= link_to 'My Profile', user_profile_path, class: "dropdown-item" %>
 
