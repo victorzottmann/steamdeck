@@ -35,6 +35,7 @@ $secondary-color: #ff9f1c;
       @include flex-center();
       
       .user-img {
+        border: 1px solid black;
         border-radius: 10%;
         width: auto; 
         height: 150px;
@@ -77,8 +78,6 @@ $secondary-color: #ff9f1c;
     @include flex-center();
     border: 1px solid black;
   }
-
-  
 
   .edit-picture {
     width: auto;

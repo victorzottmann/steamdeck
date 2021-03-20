@@ -43,31 +43,45 @@ $link-color: #1B73F9;
       .card-title:hover {
         color: $link-color;
       }
-      
-      .card-text {
-        text-decoration: none;
-        color: black;
-      }
 
-      .card-text:hover {
-        color: $link-color;
-      }
-    }
+      .shared-by-container {
+        display: flex;
+        justify-content: center;
 
-    .rent-button {
+        .shared-content {
+          text-align: center;
 
-      .btn {
-        background-color: #ff9f1c;
-        color: black;
-        border-color: black;
-        width: 100%;
-        font-size: 1em;
-        height: 40px;
+          .shared-text {
+            text-decoration: none;
+            // color: black;
+          }
+
+          .shared-link {
+            text-decoration: none;
+          }
+    
+          .shared-link:hover {
+            text-decoration: underline;
+            color: $link-color;
+          }
+        }
       }
+    
+
+    // .rent-button {
+
+    //   .btn {
+    //     background-color: #ff9f1c;
+    //     color: black;
+    //     border-color: black;
+    //     width: 100%;
+    //     font-size: 1em;
+    //     height: 40px;
+    //   }
   
-      .btn:hover {
-        background-color: #f1981a;
-      }
+    //   .btn:hover {
+    //     background-color: #f1981a;
+    //   }
 
       // .btn:focus {
       //   box-shadow: none;

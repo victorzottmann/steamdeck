@@ -1,5 +1,12 @@
+
+<!-- I realised in the last minute that this whole page could've been rendered through a partial-->
+
 <div class="container-fluid">
-  <h2 class="hero-title text-center m-5"><%= @user.first_name %> <%= @user.last_name %>'s Profile</h2>
+  <% if user_signed_in? && @user.id == current_user.id %>
+    <h2 class="hero-title text-center m-5">My Profile</h2>
+  <% else %>
+    <h2 class="hero-title text-center m-5"><%= @user.first_name %> <%= @user.last_name %>'s Profile</h2>
+  <% end %>
 </div>
 
 
@@ -13,11 +20,20 @@
       <% end%>
     </div>
     <div class="card-body">
-      <h5 class="card-title"><%= @user.first_name %> <%= @user.last_name %></h5>
+    <h5 class="card-title"><%= @user.first_name %> <%= @user.last_name %></h5>
+
+    <% if user_signed_in? && @user.id == current_user.id %>
       <% if @user.has_role?(:admin) %>
         <p style="text-align: center;">Admin</p>
       <% end %>
+      <div class="options-container">
+        <%= link_to "Edit Profile", edit_user_path, class: "btn" %>
+        <%= link_to "Account Settings", edit_user_registration_path, class: "btn" %>
+      </div>
+    <% end %>
+
       <hr>
+
       <h5>Bio</h5>
       <p class="card-text"><%= @user.bio %></p>
       <hr>
@@ -26,7 +42,12 @@
 </div>
 <br><br>
 
-<h2 class="my-books text-center"><%= @user.first_name %> <%= @user.last_name %>'s Books</h2>
+<% if user_signed_in? && @user.id == current_user.id %>
+  <h2 class="my-books text-center">My Books</h2>
+<% else %>
+  <h2 class="my-books text-center"><%= @user.first_name %> <%= @user.last_name %>'s Books</h2>
+<% end %>
+
 <br><br>
 
 <div class="cards-container">
@@ -37,16 +58,26 @@
         <h6><%= link_to "#{book.title}", book_path(book.id), class: "card-title" %></h6>
         <p style="text-align: center;"><%= link_to "#{book.author.first_name} #{book.author.last_name}", author_path(book.author.id), class: "card-text" %></p>
         <hr>
-        <div class="card-text">
-          <p><%= link_to "View", book_path(book.id) %> | <%= link_to "Edit", edit_book_path(book.id) %></p>
-        </div>
+
+        <% if current_user.id == book.user.id %>  
+          <div class="card-text">
+            <p><%= link_to "View", book_path(book.id) %> | <%= link_to "Edit", edit_book_path(book.id) %></p>
+          </div>
+        <% else %>
+          <p><%= link_to "View", book_path(book.id) %></p>
+        <% end %>
+
       </div>
     </div>
   <% end %>
 </div>
 <br><br>
 
-<h2 class="my-books text-center"><%= @user.first_name %> <%= @user.last_name %>'s Rentals</h2>
+<% if user_signed_in? && @user.id == current_user.id %>
+  <h2 class="my-books text-center">My Rentals</h2>
+<% else %>
+  <h2 class="my-books text-center"><%= @user.first_name %> <%= @user.last_name %>'s Rentals</h2>
+<% end %>
 <br><br>
 
 <div class="cards-container">
@@ -58,7 +89,11 @@
         <p style="text-align: center;"><%= link_to "#{rental.book.author.first_name} #{rental.book.author.last_name}", author_path(rental.book.author.id), class: "card-text" %></p>
         <hr>
         <div class="card-text">
-          <p><%= link_to "View", book_path(rental.book.id) %> | <%= link_to "Return", rental_path(rental.book.id) %></p>
+          <p><%= link_to "View", book_path(rental.book.id) %></p>
+
+          <!-- I didn't implement the return book feature due to lack of time -->
+          <!-- It wasn't a critical feature, just a 'nice to have' one -->
+          <!-- | <%= link_to "Return", rental_path(rental.book.id) %> -->
         </div>
       </div>
     </div>

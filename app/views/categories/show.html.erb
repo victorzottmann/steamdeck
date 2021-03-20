@@ -10,8 +10,11 @@
         <h6><%= link_to "#{book.title}", book_path(book.id), class: "card-title" %></h6>
         <p style="text-align: center;"><%= link_to "#{book.author.first_name} #{book.author.last_name}", author_path(book.author.id), class: "card-text" %></p>
         <hr>
-        <div class="rent-button">
-          <button data-stripe="payment" class="basket-text btn btn-primary">Rent for $<%= book.price %></button>
+        <div class="shared-by-container">
+          <div class="shared-content">
+            <p class="shared-text">Kindly shared by</p> 
+            <%= link_to "#{book.user.first_name} #{book.user.last_name}", user_path(book.user), class: "shared-link" %>
+          </div>
         </div>
       </div>
     </div>

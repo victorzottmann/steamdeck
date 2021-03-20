@@ -11,7 +11,7 @@
     <p>Format: <%= @book.format %></p>
     
     <!-- The has_role? method is defined in the application_helper.rb file. Its purpose is to make the process of verifying user roles easier -->
-    <% if (user_signed_in? && @book.user) || has_role?(:admin) %>
+    <% if (user_signed_in? && @book.user.id == current_user.id) || has_role?(:admin) %>
       <span><%= link_to "Edit", edit_book_path %> |</span>
       <span><%= link_to "Delete", @book, method: :delete, data: { confirm: 'Are you sure?' } %></span>
       <br />

@@ -22,7 +22,7 @@ STEAMdeck is a two-sided marketplace focused on affordable academic book rentals
 
 - Run `$ rake db:setup` to create a local database of the app and seed pre-defined data
 
-- File storage is handle by Amazon S3; payments by Stripe; and webhook endpoints by Ultrahook. To get them working, make sure you go over the following steps:
+- File storage is handled by Amazon S3; payments by Stripe; and webhook endpoints by Ultrahook. To get them working, make sure you go over the following steps:
 
   - To enable Amazon S3, uncomment the `amazon` section of the `config/storage.yml` file, then specify your region and bucket name. The public and secret keys must be passed in using Rails secure method:
 
@@ -45,6 +45,8 @@ STEAMdeck is a two-sided marketplace focused on affordable academic book rentals
 
     Finally, given that the application is normally loaded through port 3000, running ultrahook requires the following command: `ultrahook stripe 3000`
 
+- **The code was written in Ruby 2.7.2**. If for any reason you are unable to run the server, make sure you have this version installed.
+
 - Once you have everything set up, run `$ rails s` in the terminal to start the server
 
 - Load http://localhost:3000/ in the browser to run the app
@@ -61,7 +63,7 @@ STEAMdeck is a two-sided marketplace focused on affordable academic book rentals
 
 ## Purpose & Problem
 
-Generally, academic and technical books tend to be quite expensive, with some only being available to order in Euros (EUR) or British Pounds (GBP). Indeed, students already enrolled in universities are given the ability to download many of them for free, or access them through the publisher's portal for a limited timeframe. However, many people might not be in the appropriate conditions to attend university, or the current institution in which they are enrolled does not have access to specifc books. 
+Generally, academic and technical books tend to be quite expensive, with some only being available to order in Euros (EUR) or British Pounds (GBP). Indeed, students already enrolled in universities are given the ability to download many of them for free, or access them through the publisher's portal for a limited timeframe. However, many people might not be in the appropriate conditions to attend university, or the current institution in which they are enrolled does not have access to specifc books. It is also very common for even the digital versions of such books to be as expensive as their physical counterparts.
 
 For example, the following images display the price of two technical books from a renowned publisher––the publisher's name has been omitted for privacy purposes. 
 
@@ -648,7 +650,32 @@ The following list items display the existing models in the application, followe
 
   ![new-book-author-publisher](/Users/victor/code/coder/term2/assignments/z_Deliverables/VictorZottmann_T2A2/docs/screenshots/new-book-author-publisher.png)
 
+  
+  In order for the nested attributes to work properly, they were written like this in the book form:
 
+  ```erb
+  <%= form.fields_for :author do |f| %>
+    <div class="first-last-names">
+      <div>
+        <%= f.label "Author's First Name" %>
+        <%= f.text_field :first_name, class: "form-control first-name", autofocus: true, autocomplete: 					"email" %>
+      </div>
+      <div>
+        <%= f.label "Author's Last Name" %>
+        <%= f.text_field :last_name, class: "form-control last-name", autofocus: true, autocomplete: 						"email" %>
+      </div>
+    </div>
+  <% end %>
+  <br>
+  <div class="field">
+    <%= form.fields_for :publisher do |f| %>
+    	<%= f.label :publisher %>
+    	<%= f.text_field :name, class: "form-control", autocomplete: "off" %>
+    <% end %>
+  </div>
+  ```
+
+  
 
 - Category
 
