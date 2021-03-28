@@ -15,7 +15,7 @@
     <br>
     <p>
       We're sorry to see you leave. 🙁 
-      <%= button_to "Cancel Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-md", id: "cancel-btn" %>
+      <%= button_to "Cancel Account", cancel_user_registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-md", id: "cancel-btn" %>
     </p>
   </div>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
