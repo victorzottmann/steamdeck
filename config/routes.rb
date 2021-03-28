@@ -8,13 +8,16 @@ Rails.application.routes.draw do
   resources :rentals
   resources :publishers
 
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
   
   get "/profile", to: "users#profile", as: "user_profile"
   get "/profile/edit", to: "users#edit", as: "edit_user"
   patch "/profile/edit", to: "users#update", as: "update_user"
 
   get "/users/:id", to: "users#show", as: "user"
+  delete "users/cancel", to: "users#delete", as: "delete_user"
   
   get "categories/1", to: "categories#show", as: "creative_arts"
   get "categories/2", to: "categories#show", as: "design"
