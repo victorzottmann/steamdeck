@@ -59,6 +59,11 @@ STEAMdeck is a two-sided marketplace focused on affordable academic book rentals
 | Lily Dawson             | l@gmail.com     | 000000   |
 | John Markson            | j@gmail.com     | 000000   |
 
+#### For all payments please use this dummy credit card. The name whichever you like.
+| Card Number          | Expiry Date | CVV |
+| -------------------- | ----------- | --- |
+| 4242 4242 4242 4242  | 09/22       | 000 |
+
 ---
 
 ## Purpose & Problem
