@@ -70,3 +70,5 @@ gem "stripe", "~> 5.30"
 # add ultrahook for webhook endpoints
 gem "ultrahook", "~> 1.0"
 
+gem 'rails_12factor', group: :production
+
