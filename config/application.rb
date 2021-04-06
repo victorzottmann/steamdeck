@@ -31,5 +31,9 @@ module Steamdeck
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # add this so that Heroku doesn't break when logging out of an account. This is a solution suggest in 
+    # https://stackoverflow.com/questions/23073737/sign-out-not-working-on-heroku-using-devise-gem-and-rails-4
+    config.serve_static_assets = true
   end
 end

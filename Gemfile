@@ -70,3 +70,6 @@ gem "stripe", "~> 5.30"
 # add ultrahook for webhook endpoints
 gem "ultrahook", "~> 1.0"
 
+# add 12factor so that Heroku doesn't break when logging out of an account. This is a solution suggest in 
+# https://stackoverflow.com/questions/23073737/sign-out-not-working-on-heroku-using-devise-gem-and-rails-4
+gem 'rails_12factor', group: :production
