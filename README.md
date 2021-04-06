@@ -14,6 +14,8 @@ STEAMdeck is a two-sided marketplace focused on affordable academic book rentals
 
 - Clone this repository
 
+- Make sure you have PostgreSQL installed as it is the database management system used in this project.
+
 - Run `$ gem install bundler`  (if you don't have Bundler installed)
 
 - Run `$ yarn install --check-files`
