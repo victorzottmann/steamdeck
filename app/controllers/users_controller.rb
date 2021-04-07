@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+
   def profile
     @user = current_user
     @books = Book.all
@@ -14,6 +15,7 @@ class UsersController < ApplicationController
   
   def edit  
   end
+
 
   def show
     @user = User.find(params[:id])
@@ -29,6 +31,7 @@ class UsersController < ApplicationController
     end 
   end
 
+  
   private
 
     def set_profile

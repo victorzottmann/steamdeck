@@ -116,7 +116,7 @@ if Book.count == 0
     author_id: 1, # Marc Asselineau
     publisher_id: 1, # CRC Press
     category_id: 4, # Science
-    user_id: 1 # Mark Johnson
+    user_id: 1 # Admin
   )
   book1.picture.attach(
     io: File.open("app/assets/images/building-acoustics.jpg"),
