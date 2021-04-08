@@ -66,7 +66,6 @@ STEAMdeck is a two-sided marketplace focused on affordable academic book rentals
 | -------------------- | ----------- | --- |
 | 4242 4242 4242 4242  | 11/22       | 000 |
 | 5555 5555 5555 4444  | 11/22       | 000 |
-| 4242 4242 4242 4242  | 11/22       | 000 |
 
 ---
 
