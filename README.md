@@ -53,6 +53,10 @@ STEAMdeck is a two-sided marketplace focused on affordable academic book rentals
 
 - Load http://localhost:3000/ in the browser to run the app
 
+---
+
+## Login and Payments
+
 #### Login Credentials from Pre-Defined Data (Database Seeds)
 
 | Name                    | Email           | Password |
