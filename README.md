@@ -914,18 +914,6 @@ add_foreign_key "rentals", "users"
 
 ---
 
-## Task Management
-
-To be fair, I did not use Trello too much to track my progress. I admit that, for this particular aspect, I did not put too much effort in organizing my tasks on any platform. I essentially moved on from feature to feature in accordance to what I knew I wanted to do. Although this process works well for me, I acknowledge that I do need to improve my task management.
-
-##### Link to Trello Board: https://trello.com/b/xumu0k5E/rails-assignment-t2a2-victor-zottmann
-
-![trello](app/assets/images/screenshots/trello.png)
-
----
-
-
-
 ## Third Party Services
 
 | Service    | Description                                                  |
