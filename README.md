@@ -783,7 +783,7 @@ The following list items display the existing models in the application, followe
 
 
 
-#### 2. Schema - UPDATE WITH NEWER DATA
+#### 2. Schema
 
 ```ruby
 #==== Schema for Rails Active Storage ====#
