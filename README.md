@@ -4,7 +4,7 @@ STEAMdeck is a two-sided marketplace focused on affordable academic book rentals
 
 ## Links
 
-### Deployed app: https://steamdeck.herokuapp.com/
+### This app is currently going through maintenance to reestablish hosting on Heroku. In the meantime, please feel free to browse through the documentation to view how some of the key features were implemented. Thank you for your patience 🙂.
 
 ### GitHub Repo: https://github.com/victorzottmann/steamdeck
 
