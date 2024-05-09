@@ -4,7 +4,7 @@ STEAMdeck is a two-sided marketplace focused on affordable academic book rentals
 
 ## Links
 
-# GitHub Repo: https://github.com/victorzottmann/steamdeck
+GitHub Repo: https://github.com/victorzottmann/steamdeck
 
 ---
 
